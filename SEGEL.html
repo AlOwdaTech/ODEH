@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سجل العائلة</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1A56DB;
+    --primary-light: #3B82F6;
+    --primary-dark: #1E40AF;
+    --accent: #0EA5E9;
+    --bg: #F0F4FC;
+    --bg2: #E8EEF9;
+    --surface: #FFFFFF;
+    --surface2: #F8FAFF;
+    --border: #D1DCF0;
+    --border-strong: #B0C4E8;
+    --text: #1E2A45;
+    --text-mid: #4B5E80;
+    --text-muted: #7A90B5;
+    --red: #DC2626;
+    --green: #16A34A;
+    --gold: #B45309;
+    --gold-light: #D97706;
+    --shadow: 0 4px 20px rgba(26,86,219,0.10);
+    --shadow-lg: 0 8px 32px rgba(26,86,219,0.14);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    direction: rtl;
+  }
+
+  /* ===== BACKGROUND ===== */
+  body::before {
+    content:'';
+    position:fixed;
+    inset:0;
+    background:
+      radial-gradient(ellipse 70% 50% at 5% 10%, rgba(26,86,219,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 70% at 95% 90%, rgba(14,165,233,0.05) 0%, transparent 60%),
+      repeating-linear-gradient(
+        60deg,
+        transparent,
+        transparent 60px,
+        rgba(26,86,219,0.018) 60px,
+        rgba(26,86,219,0.018) 61px
+      );
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* ===== DESIGNER BANNER ===== */
+  .designer-banner {
+    background: linear-gradient(90deg, var(--primary-dark) 0%, var(--primary) 60%, var(--accent) 100%);
+    color: #fff;
+    text-align: center;
+    padding: 7px 20px;
+    font-family: 'Amiri', serif;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    position: relative;
+    z-index: 11;
+    box-shadow: 0 2px 8px rgba(26,86,219,0.18);
+  }
+
+  .designer-banner span {
+    opacity: 0.75;
+    font-size: 13px;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 300;
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    position: relative;
+    z-index: 10;
+    background: var(--surface);
+    border-bottom: 2px solid var(--border);
+    padding: 0;
+    box-shadow: 0 2px 16px rgba(26,86,219,0.09);
+  }
+
+  .header-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .logo-emblem {
+    width: 54px;
+    height: 54px;
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Amiri', serif;
+    font-size: 26px;
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(26,86,219,0.25);
+    flex-shrink: 0;
+  }
+
+  .logo-text h1 {
+    font-family: 'Amiri', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--primary-dark);
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+  }
+
+  .logo-text p {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  .header-search {
+    flex: 1;
+    max-width: 480px;
+    position: relative;
+  }
+
+  .search-global {
+    width: 100%;
+    padding: 11px 20px 11px 44px;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 50px;
+    color: var(--text);
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s;
+    direction: rtl;
+  }
+
+  .search-global:focus {
+    background: #fff;
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 3px rgba(26,86,219,0.1);
+  }
+
+  .search-global::placeholder { color: var(--text-muted); }
+
+  .search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-light);
+    font-size: 16px;
+  }
+
+  /* Export buttons in header */
+  .header-exports {
+    display: flex;
+    gap: 8px;
+  }
+
+  .btn-export {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--text-mid);
+    font-family: 'Cairo', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s;
+    white-space: nowrap;
+  }
+
+  .btn-export:hover {
+    border-color: var(--primary-light);
+    color: var(--primary);
+    background: rgba(26,86,219,0.05);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(26,86,219,0.12);
+  }
+
+  .btn-export.pdf-btn:hover {
+    border-color: #DC2626;
+    color: #DC2626;
+    background: rgba(220,38,38,0.05);
+  }
+
+  .btn-export.excel-btn:hover {
+    border-color: #16A34A;
+    color: #16A34A;
+    background: rgba(22,163,74,0.05);
+  }
+
+  /* ===== MAIN LAYOUT ===== */
+  .app-container {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 24px 32px;
+  }
+
+  /* ===== STATS DASHBOARD ===== */
+  .stats-section {
+    margin-bottom: 28px;
+  }
+
+  .stats-title {
+    font-family: 'Amiri', serif;
+    font-size: 19px;
+    color: var(--primary-dark);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .stats-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to left, transparent, var(--border-strong));
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+    gap: 12px;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 14px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(26,86,219,0.05);
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(to right, var(--primary-dark), var(--accent));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .stat-card:hover, .stat-card.active {
+    border-color: var(--primary-light);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(26,86,219,0.13);
+  }
+
+  .stat-card:hover::before, .stat-card.active::before { opacity: 1; }
+
+  .stat-card.total-card {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+    border-color: var(--primary);
+    grid-column: span 2;
+    box-shadow: 0 6px 24px rgba(26,86,219,0.22);
+  }
+
+  .stat-card.total-card .stat-number { color: #fff; font-size: 34px; }
+  .stat-card.total-card .stat-label { color: rgba(255,255,255,0.85); font-weight: 700; }
+
+  .stat-number {
+    font-family: 'Cairo', sans-serif;
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--primary);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-mid);
+    font-weight: 600;
+  }
+
+  /* ===== TABS ===== */
+  .tabs-section {
+    margin-bottom: 18px;
+  }
+
+  .tabs-wrapper {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .tab-btn {
+    padding: 8px 16px;
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    color: var(--text-mid);
+    font-family: 'Cairo', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.22s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 1px 4px rgba(26,86,219,0.05);
+  }
+
+  .tab-btn .count-badge {
+    background: rgba(26,86,219,0.08);
+    color: var(--primary);
+    padding: 1px 7px;
+    border-radius: 20px;
+    font-size: 11px;
+  }
+
+  .tab-btn:hover {
+    border-color: var(--primary-light);
+    color: var(--primary);
+    background: rgba(26,86,219,0.04);
+  }
+
+  .tab-btn.active {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+    border-color: var(--primary);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(26,86,219,0.28);
+  }
+
+  .tab-btn.active .count-badge {
+    background: rgba(255,255,255,0.22);
+    color: #fff;
+  }
+
+  /* ===== TABLE SECTION ===== */
+  .table-section {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .table-header {
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: var(--surface2);
+    flex-wrap: wrap;
+  }
+
+  .table-title {
+    font-family: 'Amiri', serif;
+    font-size: 21px;
+    color: var(--primary-dark);
+    font-weight: 700;
+  }
+
+  .table-subtitle {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .table-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-add {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 18px;
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-family: 'Cairo', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.28s;
+    box-shadow: 0 3px 12px rgba(26,86,219,0.2);
+  }
+
+  .btn-add:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(26,86,219,0.32);
+  }
+
+  .search-table {
+    padding: 9px 14px;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'Cairo', sans-serif;
+    font-size: 13px;
+    outline: none;
+    transition: all 0.25s;
+    width: 210px;
+    direction: rtl;
+  }
+
+  .search-table:focus {
+    border-color: var(--primary-light);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(26,86,219,0.1);
+  }
+
+  .search-table::placeholder { color: var(--text-muted); }
+
+  /* Table */
+  .table-wrapper {
+    overflow-x: auto;
+    max-height: 58vh;
+    overflow-y: auto;
+  }
+
+  .table-wrapper::-webkit-scrollbar { width: 6px; height: 6px; }
+  .table-wrapper::-webkit-scrollbar-track { background: var(--bg2); }
+  .table-wrapper::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    direction: rtl;
+  }
+
+  thead {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+  }
+
+  thead th {
+    background: var(--bg2);
+    color: var(--primary-dark);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 13px 16px;
+    text-align: right;
+    letter-spacing: 0.3px;
+    border-bottom: 2px solid var(--border-strong);
+    white-space: nowrap;
+  }
+
+  thead th:last-child { text-align: center; }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.18s;
+    animation: fadeRow 0.3s ease both;
+  }
+
+  @keyframes fadeRow {
+    from { opacity: 0; transform: translateX(8px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  tbody tr:hover { background: rgba(26,86,219,0.04); }
+  tbody tr:nth-child(even) { background: var(--surface2); }
+  tbody tr:nth-child(even):hover { background: rgba(26,86,219,0.05); }
+
+  tbody td {
+    padding: 11px 16px;
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  tbody td:first-child {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 13px;
+  }
+
+  .actions-cell {
+    text-align: center;
+    white-space: nowrap;
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+  }
+
+  .btn-edit, .btn-del {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .btn-edit {
+    background: rgba(22,163,74,0.1);
+    color: var(--green);
+    border: 1px solid rgba(22,163,74,0.25);
+  }
+
+  .btn-edit:hover {
+    background: rgba(22,163,74,0.2);
+    transform: scale(1.1);
+  }
+
+  .btn-del {
+    background: rgba(220,38,38,0.08);
+    color: var(--red);
+    border: 1px solid rgba(220,38,38,0.2);
+  }
+
+  .btn-del:hover {
+    background: rgba(220,38,38,0.18);
+    transform: scale(1.1);
+  }
+
+  .empty-state {
+    padding: 60px 20px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 15px;
+  }
+
+  .empty-state .empty-icon { font-size: 40px; margin-bottom: 12px; }
+
+  .table-footer {
+    padding: 13px 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--surface2);
+  }
+
+  .pagination {
+    display: flex;
+    gap: 4px;
+  }
+
+  .page-btn {
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid var(--border);
+    border-radius: 7px;
+    background: var(--surface);
+    color: var(--text-mid);
+    font-family: 'Cairo', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .page-btn:hover { border-color: var(--primary-light); color: var(--primary); background: rgba(26,86,219,0.05); }
+  .page-btn.active { background: var(--primary); border-color: var(--primary); color: #fff; font-weight: 700; }
+
+  .rows-info { font-size: 12px; color: var(--text-muted); }
+
+  /* ===== GLOBAL SEARCH RESULTS ===== */
+  .global-results {
+    position: fixed;
+    top: 110px;
+    right: 50%;
+    transform: translateX(50%);
+    width: min(700px, 90vw);
+    background: var(--surface);
+    border: 1.5px solid var(--primary-light);
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(26,86,219,0.18);
+    z-index: 1000;
+    display: none;
+    direction: rtl;
+    overflow: hidden;
+    max-height: 70vh;
+  }
+
+  .global-results.show { display: block; }
+
+  .gr-header {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--surface2);
+  }
+
+  .gr-title { font-family: 'Amiri', serif; color: var(--primary-dark); font-size: 17px; }
+
+  .gr-close {
+    width: 28px; height: 28px;
+    background: rgba(220,38,38,0.07);
+    border: 1px solid rgba(220,38,38,0.2);
+    border-radius: 6px;
+    color: var(--red);
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .gr-close:hover { background: rgba(220,38,38,0.15); }
+
+  .gr-body { overflow-y: auto; max-height: calc(70vh - 60px); }
+
+  .gr-item {
+    padding: 11px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    cursor: pointer;
+    transition: background 0.18s;
+  }
+
+  .gr-item:hover { background: rgba(26,86,219,0.04); }
+
+  .gr-item-name { font-weight: 600; font-size: 14px; color: var(--text); }
+  .gr-item-detail { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+  .gr-item-sheet {
+    font-size: 11px;
+    background: rgba(26,86,219,0.08);
+    color: var(--primary);
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    font-weight: 700;
+  }
+
+  /* ===== MODAL ===== */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(30,42,69,0.45);
+    backdrop-filter: blur(4px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+  }
+
+  .modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .modal {
+    background: var(--surface);
+    border: 1.5px solid var(--border-strong);
+    border-radius: 20px;
+    padding: 0;
+    width: min(480px, 92vw);
+    box-shadow: 0 30px 80px rgba(26,86,219,0.18);
+    direction: rtl;
+    transform: scale(0.9) translateY(20px);
+    transition: transform 0.3s;
+    overflow: hidden;
+  }
+
+  .modal-overlay.show .modal {
+    transform: scale(1) translateY(0);
+  }
+
+  .modal-head {
+    padding: 18px 22px;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .modal-title { font-family: 'Amiri', serif; font-size: 20px; color: var(--primary-dark); }
+  .modal-sheet-tag {
+    font-size: 11px;
+    background: rgba(26,86,219,0.1);
+    color: var(--primary);
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-weight: 700;
+  }
+
+  .modal-body { padding: 22px; }
+
+  .form-group {
+    margin-bottom: 14px;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 5px;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 10px 13px;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 9px;
+    color: var(--text);
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.25s;
+    direction: rtl;
+  }
+
+  .form-input:focus {
+    border-color: var(--primary-light);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(26,86,219,0.1);
+  }
+
+  .modal-footer {
+    padding: 14px 22px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    background: var(--surface2);
+  }
+
+  .btn-save {
+    padding: 10px 28px;
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.28s;
+    box-shadow: 0 3px 12px rgba(26,86,219,0.22);
+  }
+
+  .btn-save:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(26,86,219,0.32); }
+
+  .btn-cancel {
+    padding: 10px 20px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-mid);
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-cancel:hover {
+    border-color: var(--red);
+    color: var(--red);
+  }
+
+  /* ===== TOAST ===== */
+  .toast {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--surface);
+    border: 1.5px solid var(--primary-light);
+    border-radius: 12px;
+    padding: 11px 22px;
+    color: var(--text);
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    box-shadow: 0 8px 32px rgba(26,86,219,0.16);
+    direction: rtl;
+  }
+
+  .toast.show { transform: translateX(-50%) translateY(0); }
+  .toast .toast-icon { font-size: 18px; }
+
+  /* ===== CONFIRM DIALOG ===== */
+  .confirm-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(30,42,69,0.5);
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+  }
+
+  .confirm-overlay.show { opacity: 1; visibility: visible; }
+
+  .confirm-box {
+    background: var(--surface);
+    border: 1.5px solid rgba(220,38,38,0.3);
+    border-radius: 16px;
+    padding: 28px;
+    width: min(380px, 90vw);
+    text-align: center;
+    direction: rtl;
+    box-shadow: 0 20px 60px rgba(220,38,38,0.12);
+  }
+
+  .confirm-icon { font-size: 40px; margin-bottom: 12px; }
+  .confirm-title { font-family: 'Amiri', serif; font-size: 20px; color: var(--text); margin-bottom: 8px; }
+  .confirm-msg { font-size: 13px; color: var(--text-muted); margin-bottom: 22px; }
+  .confirm-actions { display: flex; gap: 12px; justify-content: center; }
+
+  .btn-confirm-del {
+    padding: 10px 24px;
+    background: var(--red);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-family: 'Cairo', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-confirm-del:hover { background: #b91c1c; transform: translateY(-1px); }
+
+  .btn-confirm-cancel {
+    padding: 10px 24px;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-mid);
+    font-family: 'Cairo', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .btn-confirm-cancel:hover { border-color: var(--primary-light); color: var(--primary); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .header-inner { padding: 12px 16px; gap: 10px; flex-wrap: wrap; }
+    .header-search { max-width: 100%; order: 3; width: 100%; flex: none; }
+    .header-exports { order: 4; width: 100%; }
+    .app-container { padding: 14px; }
+    .stats-grid { grid-template-columns: repeat(3, 1fr); }
+    .stat-card.total-card { grid-column: span 3; }
+    .table-header { flex-direction: column; align-items: flex-start; }
+    .table-actions { width: 100%; justify-content: flex-start; }
+    .search-table { width: 100%; flex: 1; }
+  }
+
+  /* ===== PRINT STYLES ===== */
+  @media print {
+    body::before { display: none; }
+    header { box-shadow: none; }
+    .header-exports, .table-actions, .pagination, .tabs-section, .stats-section { display: none !important; }
+    .table-section { box-shadow: none; border: 1px solid #ccc; }
+    .table-wrapper { max-height: none; overflow: visible; }
+    tbody tr { animation: none; }
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .stats-section, .tabs-section, .table-section {
+    animation: slideIn 0.45s ease both;
+  }
+
+  .stats-section { animation-delay: 0.05s; }
+  .tabs-section { animation-delay: 0.1s; }
+  .table-section { animation-delay: 0.15s; }
+</style>
+</head>
+<body>
+
+<!-- DESIGNER BANNER -->
+<div class="designer-banner">
+  &#10022; إعداد وتصميم المهندس / عمر أيمن عودة &nbsp;&nbsp;<span>نظام إدارة السجلات العائلية</span> &#10022;
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="logo-area">
+      <div class="logo-emblem">&#128218;</div>
+      <div class="logo-text">
+        <h1>سجل العائلة</h1>
+        <p>نظام إدارة البيانات العائلية</p>
+      </div>
+    </div>
+    <div class="header-search">
+      <span class="search-icon">&#128269;</span>
+      <input type="text" class="search-global" id="globalSearch" placeholder="ابحث في جميع السجلات..." oninput="handleGlobalSearch(this.value)">
+    </div>
+    <div class="header-exports">
+      <button class="btn-export excel-btn" onclick="exportExcel()" title="تصدير إلى Excel">
+        &#128196; Excel
+      </button>
+      <button class="btn-export pdf-btn" onclick="exportPDF()" title="تصدير إلى PDF">
+        &#128441; PDF
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- GLOBAL SEARCH RESULTS -->
+<div class="global-results" id="globalResults">
+  <div class="gr-header">
+    <span class="gr-title">نتائج البحث العام</span>
+    <button class="gr-close" onclick="closeGlobalResults()">&#10005;</button>
+  </div>
+  <div class="gr-body" id="globalResultsBody"></div>
+</div>
+
+<!-- MAIN APP -->
+<div class="app-container">
+
+  <!-- STATS -->
+  <div class="stats-section">
+    <div class="stats-title">&#128202; لوحة الإحصائيات</div>
+    <div class="stats-grid" id="statsGrid"></div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs-section">
+    <div class="tabs-wrapper" id="tabsWrapper"></div>
+  </div>
+
+  <!-- TABLE -->
+  <div class="table-section">
+    <div class="table-header">
+      <div>
+        <div class="table-title" id="currentSheetTitle">—</div>
+        <div class="table-subtitle" id="currentSheetSub"></div>
+      </div>
+      <div class="table-actions">
+        <input type="text" class="search-table" id="tableSearch" placeholder="بحث في الجدول..." oninput="filterTable(this.value)">
+        <button class="btn-add" onclick="openAddModal()">
+          <span>&#43;</span> إضافة سجل
+        </button>
+      </div>
+    </div>
+
+    <div class="table-wrapper" id="tableWrapper">
+      <div class="empty-state"><div class="empty-icon">&#128197;</div>اختر قسماً من الأعلى</div>
+    </div>
+
+    <div class="table-footer">
+      <div class="rows-info" id="rowsInfo"></div>
+      <div class="pagination" id="pagination"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- MODAL ADD/EDIT -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <span class="modal-title" id="modalTitle">إضافة سجل جديد</span>
+      <span class="modal-sheet-tag" id="modalSheetTag"></span>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">الرقم</label>
+        <input type="number" class="form-input" id="fNum" placeholder="رقم السجل">
+      </div>
+      <div class="form-group">
+        <label class="form-label">الاسم</label>
+        <input type="text" class="form-input" id="fName" placeholder="الاسم الأول">
+      </div>
+      <div class="form-group">
+        <label class="form-label">اسم الأب</label>
+        <input type="text" class="form-input" id="fFather" placeholder="اسم الأب">
+      </div>
+      <div class="form-group">
+        <label class="form-label">اسم الجد</label>
+        <input type="text" class="form-input" id="fGrand" placeholder="اسم الجد">
+      </div>
+      <div class="form-group">
+        <label class="form-label">اسم العائلة</label>
+        <input type="text" class="form-input" id="fFamily" placeholder="اسم العائلة">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-save" onclick="saveRecord()">&#10003; حفظ</button>
+      <button class="btn-cancel" onclick="closeModal()">إلغاء</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRM DELETE -->
+<div class="confirm-overlay" id="confirmOverlay">
+  <div class="confirm-box">
+    <div class="confirm-icon">&#128465;</div>
+    <div class="confirm-title">تأكيد الحذف</div>
+    <div class="confirm-msg">هل أنت متأكد من حذف هذا السجل؟ لا يمكن التراجع عن هذا الإجراء.</div>
+    <div class="confirm-actions">
+      <button class="btn-confirm-del" onclick="confirmDelete()">نعم، احذف</button>
+      <button class="btn-confirm-cancel" onclick="closeConfirm()">إلغاء</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span class="toast-icon" id="toastIcon">&#10003;</span>
+  <span id="toastMsg">تم الحفظ بنجاح</span>
+</div>
+
+<script>
+// ======================== DATA ========================
+const RAW_DATA = {"قطاقيط": [["الرقم", "الاسم", "اسم الاب", "اسم الجد", "اسم العائلة"], [1, "كنده", "علاء", "حسن", "عوده"], [2, "مهند", "علاء", "حسن", "عوده"], [3, "يامن", "علاء", "حسن", "عوده"], [4, "عبد الرحمن", "عنان", "حسن", "عوده"], [5, "الاء", "ايمن", "حسني", "عودة"], [6, "عبدالله", "أيمن", "حسني", "عوده"], [7, "عمر", "أيمن", "حسني", "عوده"], [8, "ساره", "برهان", "حسني", "عوده"], [9, "إبراهيم", "مامون", "حسني", "عودة"], [341, "امل", "مفيد", "عثمان", "عودي"], [11, "نداء", "مامون", "حسني", "عوده"], [12, "شهد", "مأمون", "حسني", "عوده"], [13, "طارق", "مأمون", "حسني", "عوده"], [105, "رايه", "ابراهيم", "يوسف", "جبر"], [15, "حسن", "مروان", "حسني", "عوده"], [16, "سجود", "مروان", "حسني", "جبر"], [17, "حسني", "مروان", "حسني", "عودة"], [19, "مراد", "مروان", "حسني", "عودة"], [241, "اسيل", "نائل", "موسى", "عيسر"], [21, "مرح", "مروان", "حسني", "عوده"], [22, "ولاء", "مروان", "حسني", "عوده"], [23, "اديب", "سعيد", "حسين", "خالد"], [24, null, null, null, null], [25, "ثابت", "سعيد", "حسين", "عوده"], [26, null, null, null, null], [27, "حكمت", "سعيد", "حسين", "خالد"], [28, "سائدة", "سعيد", "حسين", "جوده"], [29, "سائد", "سعيد", "حسين", "خالد"], [30, null, null, null, null], [31, "مجيب", "سعيد", "حسين", "خالد"], [32, null, null, null, null], [33, "محسن", "سعيد", "حسين", "ابو خالد"], [34, null, null, null, null], [35, "عاصم", "صادق", "حسين", "خالد"], [36, null, null, null, null], [37, "محمد", "صادق", "حسين", "خالد"], [38, null, null, null, null], [39, "أسامة", "عبد القادر ", "حسين", "عودة"], [40, null, null, null, null], [41, "ايسم", "عبد القادر", "حسين", "عودة"], [42, null, null, null, null], [43, "سونا", "عبد القادر", "حسين", "عوده"], [44, "مادلين", "عبد القادر", "حسين", "قادري"], [45, "ضياء", "عبد القادر", "حسين", "عودة"], [46, null, null, null, null], [47, "عروة", "عبد القادر", "حسين", "عودة"], [48, null, null, null, null], [49, "فضل", "عبد القادر", "حسين", "عودة"], [50, null, null, null, null], [51, "محمد", "عبد القادر", "حسين", "عودة"], [52, null, null, null, null], [53, "هيثم", "عبد القادر", "حسين", "عودة"], [54, null, null, null, null], [55, "دينا", "غالب", "حسين", "عودة"], [56, "لينا", "غالب", "حسين", "حمدان"], [57, "زكريا", "غالب", "حسين", "عوده"], [58, null, null, null, null], [59, "لؤي", "غالب", "حسين", "عودة"], [60, null, null, null, null], [61, "مهران", "غالب", "حسين", "عودة"], [62, null, null, null, null], [63, "نديم", "غالب", "حسين", "عوده"], [64, null, null, null, null], [65, "يحيى", "غالب", "حسين", "عودة"], [66, null, null, null, null], [67, "إبراهيم", "نظمي", "حسين", "عودة"], [68, null, null, null, null], [69, "احمد", "نظمي", "حسين", "عودة"], [70, null, null, null, null], [71, "جهاد", "نظمي", "حسين", "عودة"], [72, null, null, null, null], [73, "خميس", "نظمي", "حسين", "عوده"], [74, null, null, null, null], [75, "حنين", "نظمي", "حسين", "برهم"], [76, "انوار", "نظمي", "حسين", "رزمق"], [77, "ريما", "نظمي", "حسين", "عودة"], [78, "عبير", "نظمي", "حسين", "عودة"], [79, "مرام", "نظمي", "حسين", "عوده"], [80, "فرحان", "وديع", "حسين", "عودة"], [81, null, null, null, null], [82, "معروف", "وديع", "حسين", "عودة"], [83, null, null, null, null], [84, "اماني", "رائد", "خالد", "عودة"], [85, "ايمان", "رائد", "خالد", "عودة"], [86, "حلا", "رائد", "خالد", "عوده"], [87, "علا", "رائد", "خالد", "عودة"], [88, "خالد", "رياض", "خالد", "عوده"], [3088, "نسرين", "أحمد", "محمود", "عوده"], [90, "خلود", "رياض", "خالد", "عودة"], [91, "محمد", "رياض", "خالد", "عوده"], [92, "هدى", "رياض", "خالد", "عوده"], [93, "عهود", "رياض", "خالد", "جبر"], [94, "هديل", "رياض", "خالد", "عوده"], [95, "سعيد", "حسين", "سعيد", "خالد"], [96, null, null, null, null], [97, "سماح", "حسين", "سعيد", "ابوعامر"], [98, "مصطفى", "حسين", "سعيد", "خالد"], [99, "امير", "سائد", "سعيد", "خالد"], [100, null, null, null, null], [101, "شهد", "سائد", "سعيد", "خالد"], [102, "محمد", "سائد", "سعيد", "خالد"], [103, "يزن", "سائد", "سعيد", "خالد"], [104, "معتز", "محسن", "سعيد", "ابو خالد"], [105, "ياسين", "محسن", "سعيد", "ابو خالد"], [106, null, null, null, null], [107, "عبير", "حسن", "عبد الرحمن", "عودة"], [108, "علاء", "حسن", "عبد الرحمن", "عودة"], [2452, "لانا", "عبد الهادي", "محمد", "عودة"], [110, "عنان", "حسن", "عبد الرحمن", "عودة"], [1951, "عبير", "نظمي", "حسين", "عودة"], [112, "محمد", "حسن", "عبد الرحمن", "عوده"], [113, null, null, null, null], [114, "مهند", "حسن", "عبد الرحمن", "عودة"], [115, null, null, null, null], [116, "ايمن", "حسني", "عبد الرحمن", "عودة"], [2034, "عزيزة", "مقبل", "موسى", "عودة"], [118, "برهان", "حسني", "عبد الرحمن", "عودة"], [3192, "نورة", "فتحي", "محمود", "عودة"], [120, "مأمون", "حسني", "عبد الرحمن", "عودة"], [386, "اميرة", "عاهد", "عمر", "عودة"], [122, "مروان", "حسني", "عبد الرحمن", "عودة"], [123, "عايد", "محمد", "عبد الرحمن", "عودة"], [2355, "فريدة", "موسى", "يوسف", "عوده"], [125, "عودة", "محمد", "عبد الرحمن", "عودة"], [2506, "ليلى", "محمود", "حلمي عبد الرحيم", "عوده"], [127, "عياش", "محمد", "عبد الرحمن", "عودة"], [1526, "سلوى", "محمد", "حماد", "عودة"], [129, "ماهر", "محمد", "عبد الرحمن", "عودة"], [2786, "مريم", "يوسف", "محمود", "عودة"], [131, "مريم", "محمد", "عبد الرحمن", "عودة"], [132, "امجد", "ناصر", "عبد الرحمن", "عودي"], [1612, "سوسن", "عبد العزيز", "عبد الجبار", "عودي"], [134, "لبيب", "ناصر", "عبد الرحمن", "عوده"], [135, "بهاء", "شادي", "ماهر", "عوده"], [136, "احمد", "عمر", "ماهر", "عودة"], [137, "انس", "عمر", "ماهر", "عودة"], [138, "الاء", "محمد", "ماهر", "عودة"], [139, "جعفر", "محمد", "ماهر", "عوده"], [140, "ماهر", "محمد", "ماهر", "عوده"], [141, "صادق", "حسين", "محمد", "خالد"], [142, null, null, null, null], [143, "عبد القادر", "حسين", "محمد", "عودة"], [144, null, null, null, null], [145, "نظمي", "حسين", "محمد", "عودة"], [3053, "نجمة", "عثمان", "أحمد", "عودة"], [147, "نوال", "حسين", "محمد", "عوده"], [148, "رائد", "خالد", "محمد", "عودة"], [149, null, null, null, null], [150, "روضة", "خالد", "محمد", "عودة"], [1869, "عبد العزيز", "خليل", "عبد الرحمن", "ابو هنية"], [321, "امجد", "عبد العزيز", "خليل", "ابو هنيه"], [153, null, null, null, null], [1017, "خليل", "عبد العزيز", "خليل", "ابو هنية"], [155, null, null, null, null], [156, "رياض", "خالد", "محمد", "عودة"], [640, "بسينة", "مقبل", "موسى", "عودة"], [158, "عائشة", "خالد", "محمد", "عودة"], [159, "احمد", "عايد", "محمد", "عودة"], [160, "جمانه", "عايد", "محمد", "عوده"], [161, "لما", "عايد", "محمد", "عوده"], [162, "سوسن", "عايد", "محمد", "محمد"], [163, "حنين", "عايد", "محمد", "نزال"], [164, "ملاك", "عايد", "محمد", "عوده"], [165, "حسن", "عبد الرحمن", "محمد", "عودة"], [166, null, null, null, null], [167, "كاملة", "عبد الرحمن", "محمد", "عودة"], [168, "ندى", "عبد القادر", "محمد", "عوده"], [169, "عبد الله", "عودة", "محمد", "عوده"], [170, "علي", "عودة", "محمد", "عودة"], [171, null, null, null, null], [172, "مجدي", "عودة", "محمد", "عوده"], [173, "مي", "عودة", "محمد", "اخليف"], [174, "مجد", "عودة", "محمد", "سويدان"], [175, "محمد", "عودة", "محمد", "عودة"], [176, "عبد الرحمن", "عياش", "محمد", "عوده"], [177, "حنان", "ماهر", "محمد", "عودة"], [178, "منال", "ماهر", "محمد", "شواهنة"], [179, "دلال", "ماهر", "محمد", "عودة"], [180, "شادي", "ماهر", "محمد", "عودة"], [1941, "عبير", "تيسير", "أحمد", "عوده"], [182, "عمر", "ماهر", "محمد", "عودة"], [1090, "ديما", "فريد", "عبد الهادي", "عوده"], [184, "فادي", "ماهر", "محمد", "عودة"], [1410, "سارة", "محمد", "أحمد", "عودة"], [186, "محمد", "ماهر", "محمد", "عودة"], [207, "اسماء", "حسني", "عبد الله", "عودة"], [188, "يوسف", "ماهر", "محمد", "عودة"], [675, "بيسان", "حسني", "ابراهيم", "خليل"], [190, "كريم", "امجد", "ناصر", "عودي"], [191, "اياد", "اسعد", "خالد", "عبد الرحمن"], [988, "ختام", "عبد الهادي", "محمد", "عبد الرحمن"], [193, "تقوى", "اياد", "اسعد", "عبد الرحمن"], [194, "مروه", "اياد", "اسعد", "عبد الرحمن"]], "جابر": [["الرقم", "الاسم", "اسم الاب", "اسم الجد", "اسم العائلة"], [1, "حمد الله", "أحمد", "مصطفى", "عودة"], [2, "عادل", "أحمد", "مصطفى", "عودة"], [3, "رفقة", "محمود", "عبد الرازق", "الغرابة"], [4, "عبد الحميد", "أحمد", "مصطفى", "عودة"], [5, "زريفة", "ذيب", "عبد الجواد", "عودة"], [6, "عدلي", "أحمد", "مصطفى", "عودة"], [7, "نهلة", "أحمد", "عبد الله", "عودة"], [8, "مصطفى", "أحمد", "مصطفى", "عودة"], [9, "نظمية", "علي", "اسعد", "عودة"], [10, "رؤى", "باسم", "عبد اللطيف", "عوده"], [11, "هبة", "باسم", "عبد اللطيف", "عوده"], [12, "إبراهيم ", "بسام", "عبد اللطيف", "عودة"], [13, "مريم", "بسام", "عبد اللطيف", "عوده"], [14, "هاجر", "بسام", "عبد اللطيف", "عوده"], [15, "يحيى", "بسام", "عبد اللطيف", "عوده"], [16, "ميس", "بسام", "مصطفى", "عودة"], [17, "اسراء", "زهران", "عبد اللطيف", "عودة"], [18, "حسن", "زهران", "عبد اللطيف", "عودة"], [19, "محمد", "زهران", "عبد اللطيف", "عودة"], [20, "انوار", "ماجد", "حداد", "عوده"], [21, "نشأت", "زهران", "عبد اللطيف", "عودة"], [22, "نسرين", "زيد", "عقل ", "عودة"], [23, "نسرين", "محمدرشاد", "عبد الرحمن", "عوده"], [24, "عبد الحميد", "سائد", "عبد الحميد", "عوده"], [25, "احمد", "عادل", "احمد", "عودة"], [1282, "رهام", "عبد الرحمن", "محمود", "عودة"], [27, "بهاء", "عادل", "أحمد", "عودة"], [1325, "ريما", "جواد", "قاسم", "عوده"], [29, "علاء", "عادل", "أحمد", "عودة"], [705, "تغريد", "عبد المجيد", "محمود", "عودة"], [31, "قصي", "عادل", "أحمد", "عودة"], [3277, "هنية", "ظاهر", "محمد", "عودة"], [33, "لؤي", "عادل", "أحمد", "عودة"], [1569, "سناء", "توفيق", "رشيد", "عودة"], [35, "رامي", "عبد الحميد", "احمد", "عودة"], [36, "شيرين", "برهان", "محمد", "عودة"], [37, "خالدية", "عبد الحميد", "أحمد", "عودة"], [38, "سائد", "عبد الحميد", "أحمد", "عودة"], [39, "ريم", "فهيم", "يونس", "عودة"], [40, "سائدة", "عبد الحميد", "أحمد", "عودة"], [41, "فادي", "عبد الحميد", "أحمد", "عودة"], [42, "سماح", "عدنان", "حافظ", "عوده"], [43, "بسام", "عبد اللطيف", "اسعد", "عودة"], [44, "لينا", "صدقي", "حسن", "عودة"], [45, "عدنان", "عبد اللطيف", "اسعد", "عودة"], [46, "عبيدة", "مصطفى", "محمود", "عوده"], [47, "غسان", "عبد اللطيف", "اسعد", "عودة"], [48, "باسم", "عبد اللطيف", "اسعد ", "عودة"], [49, "ايمان", "مفيد", "عبد الهادي", "عودة"], [50, "احمد", "عدلي", "احمد", "عودة"], [51, null, null, null, null], [52, "اثار", "عدلي", "أحمد", "عودة"], [53, "حابس", "عدلي", "أحمد", "عودة"], [55, "حنظله", "عدلي", "أحمد", "عوده"], [56, null, null, null, null], [57, "منار", "عدلي", "أحمد", "عوده"], [58, "حذيفه", "عدنان", "عبد اللطيف", "عوده"], [59, "سجود", "عدنان", "عبد اللطيف", "عودة"], [60, "معاذ", "عدنان", "عبد اللطيف", "عودة"], [61, "مريم", "حسني", "عبد الرحمن", "عوده"], [62, "ابي", "عدنان ", "عبد اللطيف", "عودة"], [63, "عبدالله", "غسان", "عبد اللطيف", "عوده"], [64, "قتادة", "غسان", "عبد اللطيف", "عوده"], [65, "فتحي", "محمود", "اسعد", "عودة"], [2309, "فايقه", "عمر", "حسين", "عوده"], [67, "جابر", "أحمد", "عادل", "عوده"], [69, "جنان", "أحمد", "عادل", "عوده"], [70, "حنان", "أحمد", "عادل", "عوده"], [71, "حارث", "قصي", "عادل", "عوده"], [72, "عادل", "قصي", "عادل", "عوده"], [73, "فراس", "قصي", "عادل", "عوده"], [74, "رمزي", "لؤي", "عادل", "عودة"], [76, "سامي", "لؤي", "عادل", "عوده"], [77, "محمد", "لؤي", "عادل", "عودة"], [78, "بدر", "فتحي", "محمود", "عودة"], [314, "امتياز", "رياض", "حسين", "عودة"], [80, "تيماء", "فتحي", "محمود", "خالد"], [81, "جابر", "فتحي", "محمود", "عودة"], [3251, "هديل", "رياض", "حسين", "عودة"], [83, "رأفت", "فتحي", "محمود", "عوده"], [1302, "رولا", "اسماعيل", "محمد", "عوده"], [85, "سامي", "فتحي", "محمود", "عودة"], [2756, "مرح", "احمد", "عبد الرحمن", "داغر"], [87, "عمر", "فتحي", "محمود", "عوده"], [89, "ملاك", "فتحي", "محمود", "عودة"], [90, "نورة", "فتحي", "محمود", "عودة"], [91, "رنين", "مصطفى", "أحمد", "عودة"], [92, "عرين", "مصطفى", "أحمد", "عودة"], [93, "قيس", "مصطفى", "أحمد", "عودة"], [94, null, null, null, null], [95, "ليث", "مصطفى", "أحمد", "عودة"], [96, null, null, null, null], [97, "إبراهيم", "يوسف", "مسعود", "جبر"], [98, null, null, null, null], [99, "اروى", "صقر", "يوسف", "جبر"], [100, "اميرة", "صقر", "يوسف", "جبر"], [101, "ايهم", "صقر", "يوسف", "جبر"], [102, "ايوب", "ابراهيم", "يوسف", "جبر"], [103, null, null, null, null], [104, "جمال", "يوسف", "مسعود", "جبر"], [105, "رايه", "ابراهيم", "يوسف", "جبر"], [106, "ريان", "يوسف", "مسعود", "جبر"], [2411, "كفاح", "مصطفى", "بركات", "جبر"], [108, "لواء", "جمال", "يوسف", "جبر"], [109, "منيرة", "أحمد", "علي", "جبر"], [110, "يوسف", "جمال", "يوسف", "جبر"], [111, null, null, null, null]], "الحج عامر": [["الرقم", "الاسم", "اسم الاب", "اسم الجد", "اسم العائلة"], [1, "عروه", "اياد", "حسن", "عوده"], [2, null, null, null, null], [3, "هاشم", "اياد", "حسن", "عودة"], [4, null, null, null, null], [5, "وليد", "اياد", "حسن", "عوده"], [6, "اصلاح", "حامد", "ذيب", "عودة"], [7, "حسام", "حامد", "ذيب", "عودة"], [8, "عائدة", "داود", "عزات", "عودة"], [9, "عدنان", "حامد", "ذيب", "عودة"], [10, "مي", "ياسر", "يوسف", "عوده"], [11, "حامد", "حسام", "حامد", "عوده"], [12, "خالد", "حسام", "حامد", "عوده"], [13, "محمد", "حسام", "حامد", "عوده"], [14, "نور", "حسام", "حامد", "عتال"], [15, "اياد", "حسن", "ذيب", "عودة"], [16, "سهاد", "زكي", "داود", "عوده"], [17, "ساجد", "حسن", "ذيب", "عودة"], [18, "ليث", "حسن", "ذيب", "عودة"], [19, "مؤيد", "حسن", "ذيب", "عودة"], [20, "غدير", "رياض", "حسين", "عودة"], [21, "ايمان", "حسني", "ذيب", "رضوان"], [22, "امجد", "حسني", "ذيب", "ابو خالد"], [23, "فرح", "احمد", "سليم", "ابو خالد"], [24, "ايوب", "حسني", "ذيب", "ابو خالد"], [25, "جلال", "حسني", "ذيب", "ابو خالد"], [26, null, null, null, null], [27, "رامي", "حسني", "ذيب", "ابو خالد"], [28, "دعاء", "عامر", "عبد الرحمن ابو", "خالد"], [29, "ذيب", "حسين", "ذيب", "عودة"], [30, "ختام", "مفيد", "عبد الهادي", "عودة"], [31, "رياض", "حسين", "ذيب", "عودة"], [32, "سكينة", "فيصل", "عبد المعطي", "عودة"], [33, "نزار", "حسين", "ذيب", "عوده"], [34, "سائدة", "عبد الحميد", "أحمد", "عودة"], [35, "نزال", "حسين", "ذيب", "عوده"], [36, null, null, null, null], [37, "عرفة", "دياب", "حامد", "عودة"], [38, "رائدة", "عبد الرحمن", "احمد", "عودة"], [39, "ميسر", "دياب", "حامد", "عيسى"], [40, "عبد الرحيم", "ذياب", "حامد", "عودة"], [41, "نازك", "رفيق", "سعيد", "عودة"], [42, "فايق", "ذياب", "حامد", "عودة"], [43, "عدلية", "حسن", "أحمد", "عودة"], [44, "ياسر", "ذياب", "حامد", "عودة"], [45, "سونا", "حسن", "احمد", "عودة"], [46, "حسني", "رامي", "حسني", "ابو خالد"], [47, "امتياز", "رياض", "حسين", "عودة"], [48, "امير", "رياض", "حسين", "عودة"], [49, "عبير", "رياض", "حسين", "خولي"], [50, "غدير", "رياض", "حسين", "عودة"], [51, "منير", "رياض", "حسين", "عودة"], [52, null, null, null, null], [53, "هديل", "رياض", "حسين", "عودة"], [54, "ولاء", "سائد", "عبد الرحيم", "عوده"], [55, "بهاء", "عبد الرحيم", "دياب", "عودة"], [56, null, null, null, null], [57, "علاء", "عبد الرحيم", "دياب", "عودة"], [58, null, null, null, null], [59, "ضياء", "عبد الرحيم", "ذياب", "عودة"], [60, null, null, null, null], [61, "نداء", "عبد الرحيم", "ذياب", "عوده"], [62, null, null, null, null], [63, "دعاء", "عرفة", "ذياب", "عودة"], [64, "شادي", "عرفه", "دياب", "عوده"], [65, null, null, null, null], [66, "فادي", "عرفه", "دياب", "عوده"], [67, "هبة", "عرفه", "ذياب", "عوده"], [68, "خلود", "عزت", "ذيب", "خالد"], [69, "براءه", "علاء", "عبد الرحيم", "عوده"], [70, "دنيا", "علاء", "عبد الرحيم", "عوده"], [71, "اياد", "فايق", "دياب", "عودة"], [72, "خولة", "جميل", "صبري", "عودة"], [73, "ايمن", "فايق", "ذياب", "عودة"], [74, null, null, null, null], [75, "رنين", "فايق", "ذياب", "عوده"], [76, "هبة", "فايق", "ذياب", "عوده"], [77, "عامر", "نزار", "حسين", "عوده"], [78, "عمرو", "نزار", "حسين", "عودة"], [79, "محمد", "نزار", "حسين", "عوده"], [80, "مدلين", "نزار", "حسين", "الشمله"], [81, "نهاد", "نزار", "حسين", "عودة"], [82, null, null, null, null], [83, "اسماء", "نزال", "حسين", "عودة"], [84, "صفيه", "نزال", "حسين", "عوده"], [85, "عدن", "نزال", "حسين", "عوده"], [86, "تقوى", "ياسر", "ذياب", "عوده"], [87, "رزان", "ياسر", "ذياب", "عودة"], [88, "مالك", "ياسر", "ذياب", "عوده"], [89, "نرمين", "ياسر", "ذياب", "عوده"], [90, "احمد", "صادق", "نمر", "عوده"], [91, null, null, null, null], [92, "افتكار", "صادق", "نمر", "عودة"], [93, "سمر", "صادق", "نمر", "عيسى"], [94, "محمد", "صادق", "نمر", "عودة"], [95, null, null, null, null], [96, "ميسر", "صادق", "نمر داود", "خاطر"], [97, "نمر", "صادق", "نمر", "عودة"], [98, "كفاية", "أحمد", "عبد الله", "عودة"], [99, "هالة", "صادق", "نمر", "الشايب"], [100, "تيماء", "نمر", "صادق", "سليم"], [101, "صادق", "نمر", "صادق", "عوده"], [102, "سماء", "لؤي", "وليد", "الشايب"], [103, "لؤي", "وليد", "مصطفى", "الشايب"], [104, "وليد", "لؤي", "وليد", "الشايب"]], "مقبل": [["الرقم", "الاسم", "اسم الاب", "اسم الجد", "اسم العائلة"], [1, "اشجان", "زهران", "عثمان", "عودة"], [2, "انغام", "زهران", "عثمان", "عودة"], [3, "ركان", "زهران", "عثمان", "عوده"], [4, "ريما", "زهران", "عثمان", "عوده"], [5, "ساجد", "زهران", "عثمان", "عوده"], [6, "عثمان", "زهران", "عثمان", "عودة"], [7, null, null, null, null], [8, "نادين", "زهران", "عثمان", "عوده"], [9, "اريج", "زياد", "عثمان", "عودة"], [10, "امل", "زياد", "عثمان", "عودة"], [11, "عدي", "زياد", "عثمان", "عودي"], [12, "اياد", "فريد", "عثمان", "عودة"], [13, "تقى", "فريد", "عثمان", "عودة"], [14, "رائد", "فريد", "عثمان", "عودة"], [769, "جمالات", "عبد الله", "محمد", "عودة"], [16, "رائدة", "فريد", "عثمان", "عودة"], [17, "سائد", "فريد", "عثمان", "عودة"], [18, "سماح", "فريد", "عثمان", "عوده"], [19, "مؤيد", "فريد", "عثمان", "عودة"], [20, "ياسمين", "فريد", "عثمان", "عودة"], [21, "بدر", "فؤاد", "عثمان", "عودة"], [22, "بدران", "فؤاد", "عثمان", "عودة"], [23, null, null, null, null], [24, "بنان", "فؤاد", "عثمان", "عوده"], [25, null, null, null, null], [26, "رنا", "فؤاد", "عثمان", "عودة"], [27, "صدام", "فؤاد", "عثمان", "عوده"], [28, null, null, null, null], [29, "عثمان", "فؤاد", "عثمان", "عودة"], [30, "عنان", "فؤاد", "عثمان", "عودة"], [31, "نهى", "فؤاد", "عثمان", "عودي"], [32, "حنين", "محمد", "عثمان", "عوده"], [33, "إبراهيم", "مفيد", "عثمان", "عودي"], [34, "احمد", "مفيد", "عثمان", "عودة"], [35, null, null, null, null], [36, "امال", "مفيد", "عثمان", "عودة"], [37, "امل", "مفيد", "عثمان", "عودي"], [38, "تحرير", "مفيد", "عثمان", "عودة"], [39, "ثائر", "مفيد", "عثمان", "عودي"], [40, "رضوان", "مفيد", "عثمان", "عودي"], [41, null, null, null, null], [42, "سجود", "مفيد", "عثمان", "عوده"], [43, "عبيدة", "مفيد", "عثمان", "عودي"], [44, null, null, null, null], [45, "عودة", "مفيد", "عثمان", "عودي"], [46, null, null, null, null], [47, "محمد", "مفيد", "عثمان", "عودة"], [48, "مهيب", "مفيد", "عثمان", "عودة"], [49, "نائل", "مفيد", "عثمان", "عودة"], [50, "وائل", "مفيد", "عثمان", "عودة"], [51, "محمد", "جواد", "فارس", "عوده"], [52, "موسى", "جواد", "فارس", "عوده"], [53, "رنين", "خالد", "فارس ", "عبد الرحيم"], [54, "حليمه", "خالد", "فارس", "عوده"], [55, "فارس", "خالد", "فارس", "عودة"], [56, null, null, null, null], [57, "يزن", "خالد", "فارس", "عودة"], [58, null, null, null, null], [59, "ينال", "خالد", "فارس", "عودة"], [60, "جهاد", "اياد", "فريد", "عوده"], [61, "نهاد", "اياد", "فريد", "عوده"], [62, "بساله", "رائد", "فريد", "شواهنه"], [63, "عثمان", "رائد", "فريد", "عوده"], [64, "عدن", "رائد", "فريد", "عوده"], [65, "فريد", "رائد", "فريد", "عودة"], [67, "يزيد", "رائد", "فريد", "عوده"], [68, "انصار", "رائد ", "فريد", "عودي"], [69, "محمد", "سائد", "فريد", "عودة"], [70, null, null, null, null], [71, "مراد", "سائد", "فريد", "عوده"], [72, "ايمان", "نائل", "مفيد", "عودة"], [73, "جنان", "نائل", "مفيد", "عوده"], [74, "عميد", "نائل", "مفيد", "عوده"], [75, "مفيد", "نائل", "مفيد", "عودة"], [76, null, null, null, null], [77, "مهند", "نائل", "مفيد", "عوده"], [78, "علاء", "وائل", "مفيد", "عوده"], [79, "زهران", "عثمان", "مقبل", "عودة"], [80, null, null, null, null], [81, "زياد", "عثمان", "مقبل", "عوده"], [82, null, null, null, null], [83, "فؤاد", "عثمان", "مقبل", "عودة"], [84, "فريد", "عثمان", "مقبل", "عودة"], [85, "هناء", "عثمان", "مقبل ", "حسين"], [86, "مفيد", "عثمان", "مقبل", "عودي"], [87, null, null, null, null], [88, "لينا", "فارس", "مقبل", "قصاص"], [89, "اجود", "فارس", "مقبل", "عودة"], [90, null, null, null, null], [91, "جواد", "فارس", "مقبل", "عودة"], [92, null, null, null, null], [93, "خالد", "فارس", "مقبل", "عودة"], [94, null, null, null, null], [95, null, null, null, null], [96, "منى", "فارس", "مقبل", "ابوالرز"], [97, "منتهى", "فارس", "مقبل", "الغرابة"], [98, "سهام", "فارس", "مقبل", "عودة"], [99, "مها", "فارس", "مقبل", "عودة"], [100, "شاهر", "موسى", "مقبل", "حسين"], [101, null, null, null, null], [102, "ميسر", "موسى", "مقبل", "المراعبي"], [103, "ماجدة", "موسى", "مقبل", "مراعبة"], [104, "خولة", "موسى", "مقبل", "مراعبة"], [105, "امجد", "موسى", "مقبل", "عودة"], [106, null, null, null, null], [107, "براءة", "موسى", "مقبل", "عودة"], [108, "حنان", "موسى", "مقبل", "عوده"], [109, "محمد", "موسى", "مقبل", "عودة"], [110, null, null, null, null], [111, "مريم", "موسى", "مقبل", "عودة"], [112, "وفيق", "موسى", "مقبل", "عودة"], [113, null, null, null, null], [114, "حسام", "يوسف", "مقبل", "عودة"], [115, null, null, null, null], [116, "عزية", "يوسف", "مقبل", "حسين"], [117, "رابعة", "يوسف", "مقبل", "عودة"], [118, "علاء", "يوسف", "مقبل", "عودة"], [1175, "ربا", "عزمي", "نظمي", "عودة"], [120, "نزار", "يوسف", "مقبل", "عوده"], [121, null, null, null, null], [122, "نزال", "يوسف", "مقبل", "عوده"], [123, null, null, null, null], [124, "نضال", "يوسف", "مقبل", "عودة"], [125, "نظام", "يوسف", "مقبل", "عوده"], [126, "ختام", "محمد", "موسى", "عودة"], [127, "دلال", "محمد", "موسى", "عوده"], [128, "ليث", "محمد", "موسى", "عوده"], [129, "موسى", "محمد", "موسى", "عودة"], [130, "نورس", "محمد", "موسى", "عوده"], [131, "بسينة", "مقبل", "موسى", "عودة"], [132, "جهاد", "مقبل", "موسى", "عودة"], [1533, "سماح", "انور", "محمود", "عوده"], [134, "عزيزة", "مقبل", "موسى", "عودة"], [135, "عماد", "مقبل", "موسى", "عودة"], [310, "اماني", "عثمان", "علي", "عودة"], [137, "عمار", "مقبل", "موسى", "عودة"], [1595, "سهى", "فاروق", "نايف", "عوده"], [139, "محمد", "مقبل", "موسى", "عودة"], [2293, "فاطمة", "عزمي", "نظمي", "عودة"], [141, "موسى", "مقبل", "موسى", "عودة"], [2786, "مريم", "يوسف", "محمود", "عودة"], [143, "أحلام", "وفيق", "موسى", "عودة"], [144, "أسامة", "وفيق", "موسى", "عودة"], [145, null, null, null, null], [146, "اشرف", "وفيق", "موسى", "عودة"], [147, null, null, null, null], [148, "اكرم", "وفيق", "موسى", "عودة"], [149, null, null, null, null], [150, "انوار", "وفيق", "موسى", "عودة"], [151, "انور", "وفيق", "موسى", "عودة"], [152, null, null, null, null], [153, "موسى", "وفيق", "موسى", "عودة"], [154, null, null, null, null], [155, "براء", "علاء", "يوسف", "عودة"], [156, "رامي", "نزار", "يوسف", "عودة"], [157, null, null, null, null], [158, "محمد", "نزار", "يوسف", "عوده"], [159, null, null, null, null], [160, "ملاك", "نزار", "يوسف", "عودة"], [161, "حذيفه", "نزال", "يوسف", "عوده"], [162, "سعيد", "نزال", "يوسف", "عوده"], [163, "ماجد", "نزال", "يوسف", "عوده"], [164, "مجدي", "نزال", "يوسف", "عوده"], [165, null, null, null, null], [166, "امير", "نضال", "يوسف", "عودة"], [167, "حنين", "نضال", "يوسف", "عودة"], [168, "رامي", "نضال", "يوسف", "عودة"], [169, "ردينه", "نضال", "يوسف", "عوده"], [170, "منير", "نضال", "يوسف", "عودة"], [171, null, null, null, null], [172, "يوسف", "نضال", "يوسف", "عودة"], [173, null, null, null, null], [174, "اوس", "نظام", "يوسف", "عودة"], [175, null, null, null, null], [176, "ايمان", "نظام", "يوسف", "عودة"], [177, "بيان", "نظام", "يوسف", "عوده"], [178, "محمد", "نظام", "يوسف", "عوده"], [179, "يزن", "نظام", "يوسف", "عوده"], [180, null, null, null, null]], "حسن الحسين": [["الرقم", "الاسم", "اسم الاب", "اسم الجد", "اسم العائلة"], [1, "أحلام", "رشيد ", "حسين", "خالد"], [2, "احمد", "رشيد ", "حسين", "خالد"], [3, null, null, null, null], [4, "بسام", "رشيد", "حسين", "خالد"], [5, null, null, null, null], [6, "عزية", "رشيد", "حسين", "شملي"], [7, "غسان", "رشيد", "حسين", "خالد"], [8, null, null, null, null], [9, "فوزية", "رشيد", "حسين", "غنام"], [10, "محمد", "رشيد", "حسين", "خالد"], [11, null, null, null, null], [12, "اسيل", "محمد", "رشيد", "خالد"], [13, "الاء", "سعد", "رشيد", "خالد"], [14, "ايه", "بسام", "رشيد", "خالد"], [15, "خالد", "محمد", "رشيد", "خالد"], [16, "راشد", "أحمد", "رشيد", "خالد"], [17, "رامز", "غسان", "رشيد", "خالد"], [18, "رشيد", "بسام", "رشيد", "خالد"], [19, null, null, null, null], [20, "سجا", "بسام", "رشيد", "خالد"], [21, "غدير", "محمد", "رشيد", "خالد"], [22, "كنده", "محمد", "رشيد", "خالد"], [23, "لارا", "بسام", "رشيد", "خالد"], [24, "لميس", "غسان", "رشيد", "خالد"], [25, "محمود", "بسام", "رشيد", "خالد"], [26, "حمدان", "عبد الله", "تيم", "عودة"], [27, null, null, null, null], [28, "سوزان", "عبدالله", "تيم", "عوده"], [29, "ايمان", "حمدان", "عبد الله", "عودة"], [30, "رؤى", "حمدان", "عبد الله", "عوده"], [31, "عادل", "حمدان", "عبد الله", "عوده"], [32, "احمد", "ساطي", "عمر", "عودة"], [33, null, null, null, null], [34, "عمر", "ساطي", "عمر", "عودة"], [35, null, null, null, null], [36, "محمد", "ساطي", "عمر", "عودة"], [37, "نداء", "ساطي", "عمر", "عوده"], [38, null, null, null, null], [39, "عدي", "عبد اللطيف", "عبد الله", "حسن"], [40, null, null, null, null], [41, "عروة", "عبد اللطيف", "عبد الله", "حسن"], [42, null, null, null, null], [43, "محمد", "عبد اللطيف", "عبد الله", "حسن"], [44, null, null, null, null], [45, "عبد اللطيف", "عبد الله", "تيم", "حسن"], [46, null, null, null, null], [47, "كمال", "عبد الله", "تيم", "الحسن"], [48, null, null, null, null], [49, "ليث", "حسن", "حسين", "الخالد"], [50, "شهد", "حسن", "حسين", "الخالد"], [51, "مريم", "حسن", "حسين", "عوده"], [52, "ليال", "عمر", "ساطي", "عوده"], [53, "مرح", "عمر", "ساطي", "عوده"]], "الاعرج": [["الرقم", "الاسم", "اسم الاب", "اسم الجد", "اسم العائلة"], [1, "إبراهيم", "عاهد", "عبد العزيز", "الاعرج"], [2, null, null, null, null], [3, "احمد", "عاهد", "عبدالعزيز", "الاعرج"], [4, "سلطان", "عاهد", "عبد العزيز", "الاعرج"], [5, "سيف الدين", "عاهد", "عبد العزيز", "الاعرج"], [6, "محمد", "عاهد", "عبد العزيز", "الاعرج"], [7, null, null, null, null], [8, "نور", "عاهد", "عبد العزيز", "سليمان"], [9, "هدى", "عاهد", "عبد العزيز", "شواهنه"], [10, "عاهد", "عبد العزيز", "اسماعيل", "الاعرج"], [1652, "شروق", "ابراهيم", "أحمد", "الاعرج"]], "الاسمر": [["الرقم", "الاسم", "اسم الاب", "اسم الجد", "اسم العائلة"], [1, "براء", "برهان", "ابراهيم", "عودة"], [2, "بهاء الدين", "برهان", "ابراهيم", "عوده"], [3, "محمد", "برهان", "ابراهيم", "عوده"], [4, "سجود", "رأفت", "ابراهيم", "عودة"], [5, "عمر", "رأفت", "ابراهيم", "عوده"], [6, "لينا", "رضوان", "ابراهيم", "عوده"], [7, "نضال", "رضوان", "ابراهيم", "عوده"], [8, "تسنيم", "شوقي", "ابراهيم", "عودة"], [9, "عباس", "شوقي", "ابراهيم", "عوده"], [10, "مها", "شوقي", "ابراهيم", "عوده"], [11, "مي", "شوقي", "ابراهيم", "عوده"], [12, "محمد", "نضال", "ابراهيم", "عوده"], [13, "محمود", "نضال", "ابراهيم", "عوده"], [14, "رؤيه", "نائل", "يوسف", "شواهنه"], [15, "احمد", "علي", "احمد", "عودة"], [16, "تغريد", "فايق", "محمد", "عوده"], [17, "احمد", "رافت", "إبراهيم", "عودة"], [18, "اماني", "رافت", "إبراهيم", "عودة"], [19, "إبراهيم", "شوقي", "إبراهيم", "عودة"], [20, "اسيا", "كمال", "زهدي", "علي حمد"], [21, "إبراهيم", "نضال ", "إبراهيم", "عودة"], [22, null, null, null, null], [23, "برهان", "ابراهيم", "أحمد", "عودة"], [24, "نسرين", "محمدرشاد", "عبد الرحمن", "عوده"], [25, "رأفت", "ابراهيم", "أحمد", "عودة"], [26, "بسامة", "أحمد", "اسعد", "عودة"], [27, "رضوان", "ابراهيم", "أحمد", "عودة"], [28, "ايناس", "احمد", "محمود", "عودة"], [29, "شوقي", "ابراهيم", "أحمد", "عودة"], [30, "حسنية", "رشيد", "محمد", "عوده"], [31, "محمد", "ابراهيم", "أحمد", "عودة"], [32, "حنين", "نضال", "يوسف", "عودة"], [33, "مدحت", "ابراهيم", "أحمد", "عودة"], [34, "ممدوح", "ابراهيم", "أحمد", "عودة"], [35, "ازدهار ", "عدنان ", "محمد", "عودة"], [36, "نضال", "ابراهيم", "أحمد", "عودة"], [37, "سناء", "أحمد", "عمر", "عوده"], [38, "بسام", "علي", "أحمد", "عودة"], [39, "منال", "اسماعيل", "حسن", "عودة"], [40, "بسمة", "علي", "أحمد", "عودة"], [41, "كفاح", "علي", "أحمد", "عوده"], [42, "داليا", "أحمد", "علي", "عودة"], [43, "شادي", "أحمد", "علي", "عوده"], [44, "علاء", "أحمد", "علي", "عودة"], [45, null, null, null, null], [46, "علي", "أحمد", "علي", "عودة"], [47, "لميا", "أحمد", "علي", "عودي"], [48, "بشار", "بسام", "علي", "عوده"], [49, "لؤي", "بسام", "علي", "عوده"], [50, "محمد", "بسام", "علي", "عوده"]], "الفصوص": [["الرقم", "الاسم", "اسم الاب", "اسم الجد", "اسم العائلة"], [1, "هديل", "فراس", "سعيد", "مجد"], [2, "امير", "فراس ", "سعيد", "عودة"], [3, null, null, null, null], [4, "سعيد", "مضر", "سعيد", "عوده"], [5, "سهر", "عبد الكريم", "محمد", "عوده"], [6, "دالية", "عبد الكريم", "مصطفى", "خالد"], [7, "محمد", "عبد الكريم", "مصطفى", "عودة"], [8, null, null, null, null], [9, "ايمن", "منصور", "مصطفى", "عودة"], [10, null, null, null, null], [11, "ايوب", "منصور", "مصطفى", "عودة"], [12, null, null, null, null], [13, "بلال", "منصور", "مصطفى", "عودة"], [14, null, null, null, null], [15, "عبد السلام", "منصور", "مصطفى", "عودة"], [16, null, null, null, null], [17, "ناصر", "منصور", "مصطفى", "عودة"], [18, null, null, null, null], [19, "اشرف", "منصور", "مصطفى ", "عودة"], [20, null, null, null, null], [21, "اكرم", "منصور", "مصطفى ", "عودة"], [22, null, null, null, null], [23, "اسلام", "ايمن", "منصور", "عودة"], [24, "بلال", "ناصر", "منصور", "عوده"], [25, "قسام", "أيمن", "منصور", "عوده"], [26, "محمد", "ناصر", "منصور", "عوده"], [27, null, null, null, null], [28, "منتصر", "ناصر", "منصور", "عودة"], [29, null, null, null, null], [30, "منصور", "ناصر", "منصور", "عودة"], [31, null, null, null, null], [32, "بيسان", "محمد", "عبد الكريم", "عوض"], [33, "عارف", "محمد", "عبد الكريم", "عوده"], [34, "عبد الكريم", "محمد", "عبد الكريم", "عوده"], [35, "عبدالله", "محمد", "عبد الكريم", "عوده"], [36, "هدى", "محمد", "عبد الكريم", "عودي"], [37, "هديل", "محمد", "عبد الكريم", "عودي"], [38, "ايناس", "وحيد", "عمر", "جوابرو"], [39, "خالد", "وحيد", "عمر", "خالد"], [40, null, null, null, null], [41, "رائد", "وحيد", "عمر", "خالد"], [42, null, null, null, null], [43, "رائدة", "وحيد", "عمر", "خالد"], [44, "عاهد", "وحيد", "عمر", "خالد"], [45, null, null, null, null], [46, "عبد الله", "وحيد", "عمر", "خالد"], [47, null, null, null, null], [48, "عمر", "وحيد", "عمر", "خالد"], [49, "عودة", "وحيد", "عمر", "خالد"], [50, null, null, null, null], [51, "نهاية", "وحيد", "عمر", "عيسى"], [52, "اية", "عمر", "وحيد", "خالد"], [53, "رنا", "رائد", "وحيد", "يوسف"], [54, "عروه", "عمر", "وحيد", "خالد"], [55, null, null, null, null], [56, "علي", "عمر", "وحيد", "خالد"], [57, "مجد", "عبد الله", "وحيد", "خالد"], [58, null, null, null, null], [59, "مجدي", "عبد الله", "وحيد", "خالد"], [60, null, null, null, null], [61, "محمد", "رائد", "وحيد", "خالد"], [62, null, null, null, null], [63, "مراد", "رائد", "وحيد", "خالد"], [64, null, null, null, null], [65, "مرح", "عبد الله", "وحيد", "خالد"], [66, "مروه", "عبد الله", "وحيد", "خالد"], [67, "وحيد", "عمر", "وحيد", "خالد"], [68, null, null, null, null], [69, "إبراهيم", "جهاد", "بكر", "يوسف"], [70, null, null, null, null], [71, "توفيق", "جهاد", "بكر", "يوسف"], [72, null, null, null, null], [73, "خالد", "جهاد", "بكر", "يوسف"], [74, null, null, null, null], [75, null, null, null, null], [76, "عودة", "جهاد", "بكر", "يوسف"], [77, null, null, null, null], [78, "فاطمة", "جهاد", "بكر", "عودة"], [79, "يوسف", "جهاد", "بكر", "يوسف"], [80, null, null, null, null], [81, "زهور", "توفيق", "جهاد", "يوسف"], [82, "سحر", "خالد", "جهاد", "يوسف"], [83, "ليث", "خالد", "جهاد", "يوسف"], [84, "ختام", "سعيد", "محمد", "خالد"], [85, "سماح", "سعيد", "محمد", "عوده"], [86, "فراس", "سعيد", "محمد", "عوده"], [87, null, null, null, null], [88, "مضر", "سعيد", "محمد", "عودة"], [89, null, null, null, null], [90, "معتصم", "سعيد", "محمد", "عودة"], [91, null, null, null, null], [92, "محمد", "ابراهيم", "عبد الله", "عوده"], [93, null, null, null, null], [94, "إبراهيم ", "خليل", "محمد", "عودة"], [95, null, null, null, null], [96, "احمد", "خليل", "محمد", "عودة"], [97, null, null, null, null], [98, "ايمان", "خليل", "محمد", "عيد"], [99, "حسن", "خليل", "محمد", "عودة"], [100, null, null, null, null], [101, "حسين", "خليل", "محمد", "عودة"], [102, null, null, null, null], [103, "خالد", "خليل", "محمد", "عودة"], [104, null, null, null, null], [105, "محمود", "خليل", "محمد", "عودة"], [106, null, null, null, null], [107, "نضال", "خليل", "محمد", "عودة"], [108, null, null, null, null], [109, "نعيمة", "خليل", "محمد", "عيسى"], [110, "يوسف", "خليل", "محمد", "عودة"], [111, null, null, null, null], [112, "احمد", "جبر", "احمد", "خالد"], [113, null, null, null, null], [114, "دعاء", "جبر", "أحمد", "خالد"], [115, "عبيدة", "جبر", "أحمد", "خالد"], [116, null, null, null, null], [117, "معاويه", "جبر", "أحمد", "خالد"], [118, "جبر", "أحمد", "محمود", "خالد"], [119, null, null, null, null]]};
+
+const SHEETS = Object.keys(RAW_DATA);
+const SHEET_ICONS = {
+  'قطاقيط': '&#128049;',
+  'جابر': '&#128100;',
+  'الحج عامر': '&#129687;',
+  'مقبل': '&#128100;',
+  'حسن الحسين': '&#128100;',
+  'الاعرج': '&#128100;',
+  'الاسمر': '&#128100;',
+  'الفصوص': '&#128142;'
+};
+
+const STORAGE_KEY = 'family_registry_v1';
+
+// Load from localStorage or use raw data
+function loadData() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) return JSON.parse(saved);
+  } catch(e) {}
+  // Initialize from raw data (skip header row)
+  const db = {};
+  SHEETS.forEach(sheet => {
+    const rows = RAW_DATA[sheet];
+    db[sheet] = rows.slice(1).filter(r => r[0] !== null && r[0] !== undefined).map((r, i) => ({
+      id: String(r[0] || (i+1)),
+      num: r[0],
+      name: r[1] || '',
+      father: r[2] || '',
+      grand: r[3] || '',
+      family: r[4] || ''
+    }));
+  });
+  return db;
+}
+
+function saveData() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(appDB));
+  } catch(e) {
+    showToast('تعذر الحفظ التلقائي', '&#9888;');
+  }
+}
+
+let appDB = loadData();
+let currentSheet = SHEETS[0];
+let currentPage = 1;
+const PAGE_SIZE = 30;
+let filteredRows = [];
+let editingId = null;
+let deleteTarget = null;
+let deleteSheet = null;
+
+// ======================== INIT ========================
+function init() {
+  renderStats();
+  renderTabs();
+  switchSheet(SHEETS[0]);
+}
+
+// ======================== STATS ========================
+function renderStats() {
+  const grid = document.getElementById('statsGrid');
+  let totalAll = 0;
+  SHEETS.forEach(s => { totalAll += appDB[s].length; });
+
+  let html = `<div class="stat-card total-card" onclick="clearSheetFilter()">
+    <div class="stat-number">${totalAll.toLocaleString('ar-EG')}</div>
+    <div class="stat-label">&#127918; إجمالي جميع السجلات</div>
+  </div>`;
+
+  SHEETS.forEach(s => {
+    const cnt = appDB[s].length;
+    const icon = SHEET_ICONS[s] || '&#128100;';
+    html += `<div class="stat-card" onclick="switchSheet('${s}')" id="stat_${encodeURIComponent(s)}">
+      <div class="stat-number">${cnt.toLocaleString('ar-EG')}</div>
+      <div class="stat-label">${icon} ${s}</div>
+    </div>`;
+  });
+
+  grid.innerHTML = html;
+}
+
+function clearSheetFilter() {
+  switchSheet(currentSheet);
+}
+
+// ======================== TABS ========================
+function renderTabs() {
+  const wrapper = document.getElementById('tabsWrapper');
+  let html = '';
+  SHEETS.forEach(s => {
+    const cnt = appDB[s].length;
+    const icon = SHEET_ICONS[s] || '&#128100;';
+    html += `<button class="tab-btn" id="tab_${encodeURIComponent(s)}" onclick="switchSheet('${s}')">
+      ${icon} ${s} <span class="count-badge">${cnt}</span>
+    </button>`;
+  });
+  wrapper.innerHTML = html;
+  updateActiveTab();
+}
+
+function updateActiveTab() {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.stat-card:not(.total-card)').forEach(c => c.classList.remove('active'));
+  const tab = document.getElementById('tab_' + encodeURIComponent(currentSheet));
+  const stat = document.getElementById('stat_' + encodeURIComponent(currentSheet));
+  if (tab) tab.classList.add('active');
+  if (stat) stat.classList.add('active');
+}
+
+// ======================== SHEET ========================
+function switchSheet(sheet) {
+  currentSheet = sheet;
+  currentPage = 1;
+  document.getElementById('tableSearch').value = '';
+  filteredRows = [...appDB[currentSheet]];
+
+  document.getElementById('currentSheetTitle').innerHTML = (SHEET_ICONS[sheet]||'') + ' ' + sheet;
+  document.getElementById('currentSheetSub').textContent = `${appDB[sheet].length} سجل`;
+
+  updateActiveTab();
+  renderTable();
+}
+
+// ======================== TABLE ========================
+function filterTable(q) {
+  q = q.trim();
+  currentPage = 1;
+  if (!q) {
+    filteredRows = [...appDB[currentSheet]];
+  } else {
+    filteredRows = appDB[currentSheet].filter(r => {
+      return [r.num, r.name, r.father, r.grand, r.family]
+        .some(v => String(v || '').includes(q));
+    });
+  }
+  renderTable();
+}
+
+function renderTable() {
+  const total = filteredRows.length;
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const pageRows = filteredRows.slice(start, start + PAGE_SIZE);
+  const totalPages = Math.ceil(total / PAGE_SIZE);
+
+  document.getElementById('rowsInfo').textContent =
+    total > 0 ? `عرض ${start+1}–${Math.min(start+PAGE_SIZE, total)} من ${total} سجل` : 'لا توجد نتائج';
+
+  const wrapper = document.getElementById('tableWrapper');
+
+  if (pageRows.length === 0) {
+    wrapper.innerHTML = `<div class="empty-state"><div class="empty-icon">&#128269;</div>لا توجد سجلات تطابق البحث</div>`;
+    renderPagination(totalPages);
+    return;
+  }
+
+  let html = `<table>
+    <thead><tr>
+      <th>الرقم</th>
+      <th>الاسم</th>
+      <th>اسم الأب</th>
+      <th>اسم الجد</th>
+      <th>اسم العائلة</th>
+      <th>الإجراءات</th>
+    </tr></thead>
+    <tbody>`;
+
+  pageRows.forEach((r, i) => {
+    html += `<tr style="animation-delay:${i*0.02}s">
+      <td>${r.num || ''}</td>
+      <td>${r.name || ''}</td>
+      <td>${r.father || ''}</td>
+      <td>${r.grand || ''}</td>
+      <td>${r.family || ''}</td>
+      <td>
+        <div class="actions-cell">
+          <button class="btn-edit" title="تعديل" onclick="openEditModal('${r.id}')">&#9998;</button>
+          <button class="btn-del" title="حذف" onclick="askDelete('${r.id}')">&#128465;</button>
+        </div>
+      </td>
+    </tr>`;
+  });
+
+  html += '</tbody></table>';
+  wrapper.innerHTML = html;
+  renderPagination(totalPages);
+}
+
+function renderPagination(total) {
+  const pg = document.getElementById('pagination');
+  if (total <= 1) { pg.innerHTML = ''; return; }
+
+  let html = '';
+  const prev = currentPage - 1;
+  const next = currentPage + 1;
+
+  html += `<button class="page-btn" onclick="goPage(${prev})" ${currentPage===1?'disabled':''}>&#8250;</button>`;
+
+  let startP = Math.max(1, currentPage - 2);
+  let endP = Math.min(total, currentPage + 2);
+
+  if (startP > 1) html += `<button class="page-btn" onclick="goPage(1)">1</button>${startP>2?'<span style="color:var(--gold-dark);padding:0 4px">…</span>':''}`;
+
+  for (let p = startP; p <= endP; p++) {
+    html += `<button class="page-btn ${p===currentPage?'active':''}" onclick="goPage(${p})">${p}</button>`;
+  }
+
+  if (endP < total) html += `${endP<total-1?'<span style="color:var(--gold-dark);padding:0 4px">…</span>':''}<button class="page-btn" onclick="goPage(${total})">${total}</button>`;
+
+  html += `<button class="page-btn" onclick="goPage(${next})" ${currentPage===total?'disabled':''}>&#8249;</button>`;
+
+  pg.innerHTML = html;
+}
+
+function goPage(p) {
+  const total = Math.ceil(filteredRows.length / PAGE_SIZE);
+  if (p < 1 || p > total) return;
+  currentPage = p;
+  renderTable();
+  document.querySelector('.table-wrapper').scrollTop = 0;
+}
+
+// ======================== MODAL ========================
+function openAddModal() {
+  editingId = null;
+  document.getElementById('modalTitle').textContent = 'إضافة سجل جديد';
+  document.getElementById('modalSheetTag').textContent = currentSheet;
+  clearForm();
+  // Auto next number
+  const nums = appDB[currentSheet].map(r => parseInt(r.num)||0);
+  const nextNum = nums.length > 0 ? Math.max(...nums) + 1 : 1;
+  document.getElementById('fNum').value = nextNum;
+  document.getElementById('modalOverlay').classList.add('show');
+  setTimeout(() => document.getElementById('fName').focus(), 300);
+}
+
+function openEditModal(id) {
+  const rec = appDB[currentSheet].find(r => r.id === id);
+  if (!rec) return;
+  editingId = id;
+  document.getElementById('modalTitle').textContent = 'تعديل السجل';
+  document.getElementById('modalSheetTag').textContent = currentSheet;
+  document.getElementById('fNum').value = rec.num || '';
+  document.getElementById('fName').value = rec.name || '';
+  document.getElementById('fFather').value = rec.father || '';
+  document.getElementById('fGrand').value = rec.grand || '';
+  document.getElementById('fFamily').value = rec.family || '';
+  document.getElementById('modalOverlay').classList.add('show');
+  setTimeout(() => document.getElementById('fName').focus(), 300);
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('show');
+  editingId = null;
+}
+
+function clearForm() {
+  ['fNum','fName','fFather','fGrand','fFamily'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+}
+
+function saveRecord() {
+  const num = document.getElementById('fNum').value.trim();
+  const name = document.getElementById('fName').value.trim();
+  const father = document.getElementById('fFather').value.trim();
+  const grand = document.getElementById('fGrand').value.trim();
+  const family = document.getElementById('fFamily').value.trim();
+
+  if (!name) {
+    document.getElementById('fName').focus();
+    document.getElementById('fName').style.borderColor = 'var(--red)';
+    setTimeout(() => document.getElementById('fName').style.borderColor = '', 2000);
+    return;
+  }
+
+  if (editingId) {
+    const idx = appDB[currentSheet].findIndex(r => r.id === editingId);
+    if (idx !== -1) {
+      appDB[currentSheet][idx] = { id: editingId, num, name, father, grand, family };
+    }
+    showToast('تم تعديل السجل بنجاح', '&#9998;');
+  } else {
+    const newId = 'id_' + Date.now();
+    appDB[currentSheet].push({ id: newId, num, name, father, grand, family });
+    showToast('تم إضافة السجل بنجاح', '&#10003;');
+  }
+
+  saveData();
+  closeModal();
+  filteredRows = [...appDB[currentSheet]];
+  currentPage = Math.ceil(filteredRows.length / PAGE_SIZE);
+  renderTable();
+  renderStats();
+  renderTabs();
+  document.getElementById('currentSheetSub').textContent = `${appDB[currentSheet].length} سجل`;
+}
+
+// ======================== DELETE ========================
+function askDelete(id) {
+  deleteTarget = id;
+  deleteSheet = currentSheet;
+  document.getElementById('confirmOverlay').classList.add('show');
+}
+
+function closeConfirm() {
+  document.getElementById('confirmOverlay').classList.remove('show');
+  deleteTarget = null;
+  deleteSheet = null;
+}
+
+function confirmDelete() {
+  if (!deleteTarget || !deleteSheet) return;
+  appDB[deleteSheet] = appDB[deleteSheet].filter(r => r.id !== deleteTarget);
+  saveData();
+  closeConfirm();
+  filteredRows = filteredRows.filter(r => r.id !== deleteTarget);
+  const totalPages = Math.ceil(filteredRows.length / PAGE_SIZE);
+  if (currentPage > totalPages && totalPages > 0) currentPage = totalPages;
+  renderTable();
+  renderStats();
+  renderTabs();
+  document.getElementById('currentSheetSub').textContent = `${appDB[currentSheet].length} سجل`;
+  showToast('تم حذف السجل', '&#128465;');
+}
+
+// ======================== GLOBAL SEARCH ========================
+function handleGlobalSearch(q) {
+  q = q.trim();
+  const box = document.getElementById('globalResults');
+  const body = document.getElementById('globalResultsBody');
+
+  if (!q || q.length < 2) {
+    box.classList.remove('show');
+    return;
+  }
+
+  const results = [];
+  SHEETS.forEach(sheet => {
+    appDB[sheet].forEach(r => {
+      if ([r.num, r.name, r.father, r.grand, r.family].some(v => String(v||'').includes(q))) {
+        results.push({ sheet, rec: r });
+      }
+    });
+  });
+
+  if (results.length === 0) {
+    body.innerHTML = '<div style="padding:30px;text-align:center;color:rgba(251,246,238,0.3);font-size:14px;">لا توجد نتائج</div>';
+  } else {
+    body.innerHTML = results.slice(0, 100).map(({sheet, rec}) => `
+      <div class="gr-item" onclick="jumpToRecord('${sheet}', '${rec.id}')">
+        <div>
+          <div class="gr-item-name">${highlight(rec.name, q)} ${highlight(rec.father, q)}</div>
+          <div class="gr-item-detail">${rec.grand || ''} — ${rec.family || ''} | رقم: ${rec.num || ''}</div>
+        </div>
+        <span class="gr-item-sheet">${sheet}</span>
+      </div>
+    `).join('') + (results.length > 100 ? `<div style="padding:12px 20px;text-align:center;color:var(--gold);font-size:12px;">... و ${results.length-100} نتيجة أخرى</div>` : '');
+  }
+
+  box.classList.add('show');
+}
+
+function highlight(text, q) {
+  if (!text) return '';
+  return String(text).replace(new RegExp(q, 'g'), `<mark style="background:rgba(201,168,76,0.3);color:var(--gold-light);border-radius:3px;padding:0 2px">${q}</mark>`);
+}
+
+function closeGlobalResults() {
+  document.getElementById('globalResults').classList.remove('show');
+  document.getElementById('globalSearch').value = '';
+}
+
+function jumpToRecord(sheet, id) {
+  closeGlobalResults();
+  switchSheet(sheet);
+  document.getElementById('tableSearch').value = '';
+  filteredRows = [...appDB[sheet]];
+  const idx = filteredRows.findIndex(r => r.id === id);
+  if (idx !== -1) {
+    currentPage = Math.floor(idx / PAGE_SIZE) + 1;
+  }
+  renderTable();
+
+  setTimeout(() => {
+    const rows = document.querySelectorAll('.table-wrapper tbody tr');
+    const localIdx = idx % PAGE_SIZE;
+    if (rows[localIdx]) {
+      rows[localIdx].style.background = 'rgba(201,168,76,0.2)';
+      rows[localIdx].scrollIntoView({behavior:'smooth', block:'center'});
+      setTimeout(() => { rows[localIdx].style.background = ''; }, 2000);
+    }
+  }, 100);
+}
+
+// ======================== TOAST ========================
+function showToast(msg, icon='&#10003;') {
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').innerHTML = msg;
+  document.getElementById('toastIcon').innerHTML = icon;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ======================== KEYBOARD ========================
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeModal();
+    closeConfirm();
+    closeGlobalResults();
+  }
+});
+
+document.getElementById('modalOverlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+});
+
+document.getElementById('confirmOverlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('confirmOverlay')) closeConfirm();
+});
+
+// ======================== EXPORT EXCEL ========================
+function exportExcel() {
+  const rows = filteredRows.length > 0 ? filteredRows : appDB[currentSheet];
+  const sheetName = currentSheet;
+
+  // Build CSV content (Excel-compatible UTF-8 BOM)
+  let csv = '\uFEFF';
+  csv += 'الرقم,الاسم,اسم الأب,اسم الجد,اسم العائلة\n';
+  rows.forEach(r => {
+    const escape = v => {
+      const s = String(v || '');
+      return s.includes(',') || s.includes('"') || s.includes('\n') ? `"${s.replace(/"/g,'""')}"` : s;
+    };
+    csv += [escape(r.num), escape(r.name), escape(r.father), escape(r.grand), escape(r.family)].join(',') + '\n';
+  });
+
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `سجل_${sheetName}_${new Date().toLocaleDateString('ar-EG').replace(/\//g,'-')}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast(`تم تصدير ${sheetName} إلى Excel`, '&#128196;');
+}
+
+// ======================== EXPORT PDF ========================
+function exportPDF() {
+  const rows = filteredRows.length > 0 ? filteredRows : appDB[currentSheet];
+  const sheetName = currentSheet;
+  const dateStr = new Date().toLocaleDateString('ar-EG');
+
+  // Build a print-friendly HTML page
+  const tableRows = rows.map((r, i) =>
+    `<tr style="background:${i%2===0?'#f8faff':'#fff'}">
+      <td>${r.num||''}</td>
+      <td>${r.name||''}</td>
+      <td>${r.father||''}</td>
+      <td>${r.grand||''}</td>
+      <td>${r.family||''}</td>
+    </tr>`
+  ).join('');
+
+  const printHTML = `<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>سجل ${sheetName}</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: 'Cairo', Arial, sans-serif; direction:rtl; background:#fff; color:#1e2a45; padding:28px; }
+  .header { text-align:center; margin-bottom:20px; border-bottom:3px solid #1A56DB; padding-bottom:16px; }
+  .header h1 { font-size:24px; color:#1A56DB; font-weight:900; margin-bottom:4px; }
+  .header .sub { font-size:13px; color:#4B5E80; margin-bottom:2px; }
+  .header .designer { font-size:12px; color:#7A90B5; }
+  .meta { display:flex; justify-content:space-between; margin-bottom:16px; font-size:12px; color:#4B5E80; background:#f0f4fc; padding:8px 14px; border-radius:8px; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  thead th { background:#1A56DB; color:#fff; padding:10px 12px; text-align:right; font-weight:700; font-size:12px; }
+  tbody td { padding:8px 12px; border-bottom:1px solid #e8eef9; }
+  tbody tr:hover { background:#f0f4fc; }
+  .footer { text-align:center; margin-top:20px; font-size:11px; color:#7A90B5; border-top:1px solid #e8eef9; padding-top:12px; }
+  @media print {
+    body { padding:10px; }
+    @page { margin:15mm; }
+  }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>&#128218; سجل ${sheetName}</h1>
+  <div class="sub">نظام إدارة البيانات العائلية</div>
+  <div class="designer">إعداد وتصميم المهندس / عمر أيمن عودة</div>
+</div>
+<div class="meta">
+  <span>&#128203; القسم: ${sheetName}</span>
+  <span>&#128100; عدد السجلات: ${rows.length}</span>
+  <span>&#128197; تاريخ التصدير: ${dateStr}</span>
+</div>
+<table>
+  <thead><tr><th>الرقم</th><th>الاسم</th><th>اسم الأب</th><th>اسم الجد</th><th>اسم العائلة</th></tr></thead>
+  <tbody>${tableRows}</tbody>
+</table>
+<div class="footer">إعداد وتصميم المهندس / عمر أيمن عودة — جميع الحقوق محفوظة ${new Date().getFullYear()}</div>
+<script>window.onload=()=>{window.print();}<\/script>
+</body></html>`;
+
+  const blob = new Blob([printHTML], { type: 'text/html;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const win = window.open(url, '_blank');
+  if (!win) {
+    // fallback: download
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `سجل_${sheetName}.html`;
+    a.click();
+  }
+  setTimeout(() => URL.revokeObjectURL(url), 5000);
+  showToast(`جارٍ تصدير ${sheetName} إلى PDF`, '&#128441;');
+}
+
+// ======================== AUTO-SAVE INDICATOR ========================
+window.addEventListener('beforeunload', () => { saveData(); });
+
+// ======================== START ========================
+init();
+
+// Show save notification on first load
+setTimeout(() => {
+  showToast('تم تحميل البيانات — الحفظ التلقائي مفعّل', '&#128190;');
+}, 800);
+</script>
+
+</body>
+</html>

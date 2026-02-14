@@ -1,0 +1,3255 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام الانتخابات المحلية الفلسطينية - النسخة المتطورة</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a237e;
+            --secondary-color: #0d47a1;
+            --accent-color: #ff5722;
+            --light-color: #f5f7ff;
+            --dark-color: #0d1b36;
+            --success-color: #2e7d32;
+            --warning-color: #ff9800;
+            --info-color: #0277bd;
+            --gradient-primary: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
+            --gradient-secondary: linear-gradient(135deg, #0d47a1 0%, #0277bd 100%);
+            --gradient-accent: linear-gradient(135deg, #ff5722 0%, #ff9800 100%);
+            --shadow-light: 0 5px 15px rgba(0, 0, 0, 0.05);
+            --shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --shadow-heavy: 0 15px 35px rgba(0, 0, 0, 0.15);
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        body {
+            background-color: #f8fafc;
+            color: #333;
+            line-height: 1.7;
+            font-weight: 400;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%230d47a1' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+        
+        .navbar {
+            background: var(--gradient-primary);
+            box-shadow: var(--shadow-medium);
+            padding: 1rem 0;
+            transition: var(--transition);
+        }
+        
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: white !important;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-brand i {
+            margin-left: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .header-section {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 80px 0 60px;
+            margin-bottom: 40px;
+            border-radius: 0 0 30px 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M45.8,-53.8C59.7,-42.7,72.2,-29.2,76.3,-13.6C80.5,2,76.2,19.7,66.7,33.4C57.2,47.2,42.5,57.1,26.8,62.8C11.1,68.5,-5.6,70,-20.9,66.2C-36.2,62.3,-50.1,53.1,-60.1,40.3C-70.1,27.5,-76.2,11.1,-75.8,-5.3C-75.5,-21.8,-68.6,-38.3,-56.4,-49.3C-44.3,-60.3,-26.8,-65.8,-9.3,-62.4C8.2,-59,16.4,-46.8,45.8,-53.8Z' transform='translate(100 100)' fill='%23ffffff' fill-opacity='0.05'/%3E%3C/svg%3E");
+            opacity: 0.2;
+        }
+        
+        .display-4 {
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .lead {
+            font-size: 1.25rem;
+            font-weight: 300;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card {
+            border-radius: var(--border-radius);
+            border: none;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-heavy);
+        }
+        
+        .card-header {
+            background: var(--gradient-secondary);
+            color: white;
+            border-radius: var(--border-radius) var(--border-radius) 0 0 !important;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 1.2rem 1.5rem;
+            border-bottom: none;
+        }
+        
+        .card-body {
+            padding: 1.8rem;
+        }
+        
+        .btn {
+            border-radius: 8px;
+            font-weight: 600;
+            padding: 0.6rem 1.5rem;
+            transition: var(--transition);
+            border: none;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-primary);
+            box-shadow: 0 4px 10px rgba(26, 35, 126, 0.3);
+        }
+        
+        .btn-primary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(26, 35, 126, 0.4);
+        }
+        
+        .btn-success {
+            background: var(--success-color);
+            box-shadow: 0 4px 10px rgba(46, 125, 50, 0.3);
+        }
+        
+        .btn-success:hover {
+            background: #1b5e20;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(46, 125, 50, 0.4);
+        }
+        
+        .btn-warning {
+            background: var(--warning-color);
+            box-shadow: 0 4px 10px rgba(255, 152, 0, 0.3);
+        }
+        
+        .btn-warning:hover {
+            background: #ef6c00;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 152, 0, 0.4);
+        }
+        
+        .btn-danger {
+            background: #d32f2f;
+            box-shadow: 0 4px 10px rgba(211, 47, 47, 0.3);
+        }
+        
+        .btn-danger:hover {
+            background: #b71c1c;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(211, 47, 47, 0.4);
+        }
+        
+        .btn-print {
+            background: var(--gradient-accent);
+            color: white;
+            box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3);
+        }
+        
+        .btn-print:hover {
+            background: #e64a19;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 87, 34, 0.4);
+            color: white;
+        }
+        
+        .results-card {
+            border-left: 5px solid var(--success-color);
+        }
+        
+        .candidate-card {
+            border-left: 5px solid var(--info-color);
+        }
+        
+        .list-card {
+            border-left: 5px solid var(--warning-color);
+        }
+        
+        .stat-card {
+            border-left: 5px solid var(--accent-color);
+        }
+        
+        .table {
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .table th {
+            background-color: #f1f5fd;
+            font-weight: 700;
+            color: var(--dark-color);
+            border-bottom: 2px solid #e0e7ff;
+            padding: 1rem;
+        }
+        
+        .table td {
+            padding: 0.9rem 1rem;
+            vertical-align: middle;
+        }
+        
+        .table-hover tbody tr:hover {
+            background-color: #f8fbff;
+        }
+        
+        .percentage-bar {
+            height: 24px;
+            background-color: #e9ecef;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .percentage-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            text-align: center;
+            color: white;
+            font-size: 14px;
+            line-height: 24px;
+            font-weight: 600;
+            transition: width 0.8s ease;
+            box-shadow: 0 2px 5px rgba(26, 35, 126, 0.3);
+        }
+        
+        .list-group-item.active {
+            background: var(--gradient-primary);
+            border-color: var(--primary-color);
+        }
+        
+        .section-title {
+            color: var(--dark-color);
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            position: relative;
+            font-weight: 800;
+            font-size: 1.8rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            right: 0;
+            width: 100px;
+            height: 3px;
+            background: var(--gradient-primary);
+        }
+        
+        .badge {
+            font-weight: 600;
+            padding: 0.35em 0.65em;
+            border-radius: 6px;
+        }
+        
+        .floating-action-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient-accent);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 6px 20px rgba(255, 87, 34, 0.4);
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+        
+        .floating-action-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(255, 87, 34, 0.5);
+        }
+        
+        .stat-box {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            border-top: 4px solid var(--primary-color);
+        }
+        
+        .stat-box:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .stat-box h3 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-box p {
+            color: #666;
+            font-weight: 500;
+            margin-bottom: 0;
+        }
+        
+        .alert {
+            border-radius: var(--border-radius);
+            border: none;
+            box-shadow: var(--shadow-light);
+            font-weight: 500;
+        }
+        
+        .progress {
+            height: 12px;
+            border-radius: 6px;
+            background-color: #e9ecef;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .progress-bar {
+            border-radius: 6px;
+            background: var(--gradient-primary);
+            box-shadow: 0 2px 5px rgba(26, 35, 126, 0.3);
+        }
+        
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+        
+        footer h5 {
+            color: white;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        footer a {
+            color: #bbdefb;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        footer a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        .print-only {
+            display: none;
+        }
+        
+        .form-control, .form-select {
+            border-radius: 8px;
+            border: 1px solid #d1d9e6;
+            padding: 0.75rem 1rem;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(26, 35, 126, 0.15);
+        }
+        
+        .form-range::-webkit-slider-thumb {
+            background: var(--gradient-primary);
+        }
+        
+        .form-range::-moz-range-thumb {
+            background: var(--gradient-primary);
+        }
+        
+        .form-check-input:checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .modal-content {
+            border-radius: var(--border-radius);
+            border: none;
+            box-shadow: var(--shadow-heavy);
+        }
+        
+        .modal-header {
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+        }
+        
+        @media print {
+            .no-print, .floating-action-btn, .navbar, footer, .btn {
+                display: none !important;
+            }
+            
+            .print-only {
+                display: block !important;
+            }
+            
+            .card {
+                break-inside: avoid;
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
+            }
+            
+            .header-section {
+                background: #f0f0f0 !important;
+                color: #000 !important;
+                -webkit-print-color-adjust: exact;
+            }
+            
+            body {
+                background: white !important;
+                color: #000 !important;
+            }
+            
+            .section-title {
+                color: #000 !important;
+                border-bottom: 2px solid #000 !important;
+            }
+            
+            .table th {
+                background-color: #f0f0f0 !important;
+                -webkit-print-color-adjust: exact;
+            }
+            
+            .percentage-fill {
+                background: #ccc !important;
+                -webkit-print-color-adjust: exact;
+            }
+            
+            .progress-bar {
+                background: #ccc !important;
+                -webkit-print-color-adjust: exact;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-section {
+                padding: 60px 0 40px;
+            }
+            
+            .display-4 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .floating-action-btn {
+                bottom: 20px;
+                left: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+        
+        /* تخصيص مخصص للخطوط */
+        .font-weight-light {
+            font-weight: 300 !important;
+        }
+        
+        .font-weight-normal {
+            font-weight: 400 !important;
+        }
+        
+        .font-weight-medium {
+            font-weight: 500 !important;
+        }
+        
+        .font-weight-bold {
+            font-weight: 700 !important;
+        }
+        
+        .font-weight-extrabold {
+            font-weight: 800 !important;
+        }
+        
+        /* أنيميشن لدخول العناصر */
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 87, 34, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 87, 34, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 87, 34, 0); }
+        }
+        
+        /* تخصيص التمرير */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- زر العائمة للطباعة -->
+    <button class="floating-action-btn pulse no-print" id="printBtn" title="طباعة النتائج">
+        <i class="fas fa-print"></i>
+    </button>
+
+    <!-- شريط التنقل -->
+    <nav class="navbar navbar-expand-lg navbar-dark no-print">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-vote-yea"></i> نظام الانتخابات المحلية
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#intro">مقدمة</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#data-input">إدخال البيانات</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#calculations">الحسابات</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#results">النتائج</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="SEGEL.html">قاعدة البيانات</a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-print btn-sm ms-2" id="navbarPrintBtn">
+                            <i class="fas fa-print me-1"></i> طباعة
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- رأس الصفحة -->
+    <header class="header-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8 fade-in">
+                    <h1 class="display-4 fw-bold">نظام الانتخابات المحلية الفلسطينية</h1>
+                    <p class="lead">بناءً على القرار بقانون رقم (23) لسنة 2025م بشأن انتخاب مجالس الهيئات المحلية</p>
+                    <p class="font-weight-medium">قاعدة بيانات افتراضية لعشيرة آل عودة - مع الحسابات الدقيقة 100%</p>
+                    <div class="mt-4">
+                        <button class="btn btn-light me-2" id="startGuide">
+                            <i class="fas fa-play-circle me-2"></i> بدء الدليل الإرشادي
+                        </button>
+                        <button class="btn btn-outline-light" id="quickDemo">
+                            <i class="fas fa-bolt me-2"></i> تجربة سريعة
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center fade-in">
+                    <div class="bg-white rounded-3 p-4 shadow-lg" style="background: rgba(255, 255, 255, 0.95);">
+                        <h4 class="text-dark fw-bold mb-3">عشيرة آل عودة</h4>
+                        <p class="text-muted">قاعدة بيانات انتخابية متكاملة</p>
+                        <div class="mt-3">
+                            <span class="badge bg-primary me-2">بلدية</span>
+                            <span class="badge bg-success">قروية</span>
+                            <span class="badge bg-warning">كوتا نسائية</span>
+                            <span class="badge bg-info">سانت لوجي</span>
+                        </div>
+                        <hr class="my-3">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h5 class="fw-bold text-primary mb-0" id="headerSeats">11</h5>
+                                <small>مقاعد</small>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold text-success mb-0" id="headerVoters">10,000</h5>
+                                <small>ناخب</small>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold text-warning mb-0" id="headerCandidates">11</h5>
+                                <small>مرشح</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- المحتوى الرئيسي -->
+    <main class="container">
+        <!-- قسم المقدمة -->
+        <section id="intro" class="mb-5 fade-in">
+            <h2 class="section-title">المقدمة العامة للنظام الانتخابي</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <i class="fas fa-info-circle me-2"></i>معلومات أساسية
+                        </div>
+                        <div class="card-body">
+                            <p class="font-weight-medium">بناءً على القانون، يتم إجراء الانتخابات المحلية كل <span class="fw-bold text-primary">4 سنوات</span> في جميع مجالس الهيئات المحلية (بلديات وقرى).</p>
+                            <p>الانتخابات <span class="fw-bold text-success">حرة، مباشرة، سرية، وشخصية</span>، ولا يجوز التصويت بالوكالة.</p>
+                            <p class="fw-bold">يحق التصويت لكل فلسطيني:</p>
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item d-flex align-items-center">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    بلغ 18 عامًا
+                                </li>
+                                <li class="list-group-item d-flex align-items-center">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    مقيم في المنطقة لمدة لا تقل عن 6 أشهر
+                                </li>
+                                <li class="list-group-item d-flex align-items-center">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    مدرج في سجل الناخبين النهائي
+                                </li>
+                                <li class="list-group-item d-flex align-items-center">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    غير فاقد للأهلية القانونية
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <i class="fas fa-balance-scale me-2"></i>أنظمة الانتخاب
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-4">
+                                <h5 class="text-primary fw-bold d-flex align-items-center">
+                                    <i class="fas fa-city me-2"></i> 1. المجالس البلدية
+                                </h5>
+                                <p class="font-weight-medium">نظام التمثيل النسبي بقوائم مفتوحة:</p>
+                                <ul class="ps-3">
+                                    <li>يسمح للناخب بالتأثير على ترتيب المرشحين داخل القائمة</li>
+                                    <li>الناخب يختار قائمة واحدة ويصوت لـ5 مرشحين أو أقل من نفس القائمة</li>
+                                    <li><span class="fw-bold">نسبة الحسم:</span> <span class="badge bg-danger">5%</span> من الأصوات الصحيحة</li>
+                                    <li><span class="fw-bold">طريقة توزيع المقاعد:</span> <span class="badge bg-info">سانت لوجي</span></li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h5 class="text-success fw-bold d-flex align-items-center">
+                                    <i class="fas fa-home me-2"></i> 2. المجالس القروية
+                                </h5>
+                                <p class="font-weight-medium">نظام الأغلبية بالترشح الفردي:</p>
+                                <ul class="ps-3">
+                                    <li>الفوز لأعلى الأصوات تنازليًا</li>
+                                    <li>الناخب يختار 5 مرشحين أو أقل</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card stat-card">
+                        <div class="card-header">
+                            <i class="fas fa-chart-pie me-2"></i>الكوتا (الحصص الإلزامية)
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="text-warning fw-bold d-flex align-items-center">
+                                        <i class="fas fa-female me-2"></i>كوتا المرأة
+                                    </h5>
+                                    <p class="font-weight-medium">يجب مراعاة تمثيل المرأة بنسبة محددة حسب حجم المجلس:</p>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>عدد المقاعد</th>
+                                                    <th>الحد الأدنى للنساء</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>9 مقاعد</td>
+                                                    <td><span class="badge bg-warning">مقعدان على الأقل</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>11 مقعدًا</td>
+                                                    <td><span class="badge bg-warning">3 مقاعد على الأقل</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>13 أو 15 مقعدًا</td>
+                                                    <td><span class="badge bg-warning">4 مقاعد على الأقل</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5 class="text-info fw-bold d-flex align-items-center">
+                                        <i class="fas fa-hands-praying me-2"></i>الكوتا الإسلامية-المسيحية
+                                    </h5>
+                                    <p class="font-weight-medium">في المناطق ذات التمثيل الإسلامي المسيحي:</p>
+                                    <ul class="ps-3">
+                                        <li>يتم تخصيص مقاعد للأقليات الدينية</li>
+                                        <li>يحدد رئيس الدولة عدد المقاعد المخصصة للمسيحيين</li>
+                                        <li>تضع اللجنة النظام الذي يضمن تحقيق ذلك</li>
+                                    </ul>
+                                    <div class="alert alert-info mt-3">
+                                        <i class="fas fa-info-circle me-2"></i>
+                                        <strong>ملاحظة:</strong> يتم تطبيق هذه الكوتا في المناطق المختلطة دينيًا فقط.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم إدخال البيانات -->
+        <section id="data-input" class="mb-5 fade-in">
+            <h2 class="section-title">إدخال البيانات الانتخابية</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <div>
+                                <i class="fas fa-database me-2"></i>بيانات الانتخاب العامة
+                            </div>
+                            <button class="btn btn-sm btn-outline-light" id="helpGeneralBtn" title="مساعدة">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="electionType" class="form-label fw-bold">نوع الانتخابات</label>
+                                <select class="form-select" id="electionType">
+                                    <option value="municipal">انتخابات المجالس البلدية</option>
+                                    <option value="village">انتخابات المجالس القروية</option>
+                                </select>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="votersCount" class="form-label fw-bold">عدد الناخبين</label>
+                                        <input type="number" class="form-control" id="votersCount" value="10000" min="100" max="1000000">
+                                        <div class="form-text">عدد الناخبين المسجلين في المنطقة</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="seatsCount" class="form-label fw-bold">عدد المقاعد في المجلس</label>
+                                        <select class="form-select" id="seatsCount">
+                                            <option value="9">9 مقاعد</option>
+                                            <option value="11" selected>11 مقعدًا</option>
+                                            <option value="13">13 مقعدًا</option>
+                                            <option value="15">15 مقعدًا</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="participationRate" class="form-label fw-bold">نسبة المشاركة المتوقعة</label>
+                                <input type="range" class="form-range" id="participationRate" min="30" max="90" value="70">
+                                <div class="d-flex justify-content-between">
+                                    <small class="text-muted">30%</small>
+                                    <span id="participationValue" class="fw-bold text-primary">70%</span>
+                                    <small class="text-muted">90%</small>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="invalidVotes" class="form-label fw-bold">نسبة الأصوات الباطلة المتوقعة</label>
+                                <input type="range" class="form-range" id="invalidVotes" min="1" max="15" value="5">
+                                <div class="d-flex justify-content-between">
+                                    <small class="text-muted">1%</small>
+                                    <span id="invalidValue" class="fw-bold text-primary">5%</span>
+                                    <small class="text-muted">15%</small>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-primary w-100" id="updateData">
+                                <i class="fas fa-sync-alt me-2"></i>تحديث البيانات
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <div>
+                                <i class="fas fa-users me-2"></i>بيانات قائمة عشيرة آل عودة
+                            </div>
+                            <button class="btn btn-sm btn-outline-light" id="helpListBtn" title="مساعدة">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="listName" class="form-label fw-bold">اسم القائمة</label>
+                                <input type="text" class="form-control" id="listName" value="قائمة عشيرة آل عودة">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="listVotes" class="form-label fw-bold">الأصوات المتوقعة للقائمة</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="listVotes" value="2500" min="0">
+                                    <span class="input-group-text">صوت</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="requiredCandidates" class="form-label fw-bold">عدد المرشحين المطلوب فوزهم</label>
+                                <input type="number" class="form-control" id="requiredCandidates" value="5" min="1" max="15">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">الكوتا المطلوبة للقائمة</label>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="womenQuota" checked>
+                                    <label class="form-check-label" for="womenQuota">
+                                        <i class="fas fa-female me-1"></i> كوتا نسائية (3 نساء على الأقل)
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="religiousQuota">
+                                    <label class="form-check-label" for="religiousQuota">
+                                        <i class="fas fa-hands-praying me-1"></i> كوتا إسلامية-مسيحية
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-success w-100" id="addCandidateBtn">
+                                <i class="fas fa-user-plus me-2"></i>إضافة مرشح جديد
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- جدول المرشحين -->
+            <div class="card candidate-card mt-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <div>
+                        <i class="fas fa-user-friends me-2"></i>المرشحون في قائمة عشيرة آل عودة
+                    </div>
+                    <div>
+                        <span class="badge bg-primary me-2" id="candidatesCount">11 مرشح</span>
+                        <button class="btn btn-sm btn-outline-light" id="autoFillCandidates">
+                            <i class="fas fa-magic me-1"></i> تعبئة تلقائية
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="candidatesTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>اسم المرشح</th>
+                                    <th>الأصوات الشخصية المتوقعة</th>
+                                    <th>الجنس</th>
+                                    <th>الدين (إن وجد)</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="candidatesBody">
+                                <!-- سيتم ملؤها بالبيانات -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- القوائم المنافسة (للمجالس البلدية) -->
+            <div class="card list-card mt-4" id="competingListsSection">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <div>
+                        <i class="fas fa-flag me-2"></i>القوائم المنافسة (للمجالس البلدية)
+                    </div>
+                    <span class="badge bg-warning" id="competingListsCount">3 قوائم</span>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" id="newListName" placeholder="اسم القائمة المنافسة">
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="newListVotes" placeholder="الأصوات المتوقعة">
+                                <span class="input-group-text">صوت</span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-primary w-100" id="addListBtn">
+                                <i class="fas fa-plus-circle me-1"></i> إضافة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="competingListsTable">
+                            <thead>
+                                <tr>
+                                    <th>اسم القائمة</th>
+                                    <th>الأصوات المتوقعة</th>
+                                    <th>النسبة %</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="competingListsBody">
+                                <!-- سيتم ملؤها بالبيانات -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم الحسابات -->
+        <section id="calculations" class="mb-5 fade-in">
+            <h2 class="section-title">الحسابات الانتخابية الدقيقة</h2>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <div>
+                                <i class="fas fa-calculator me-2"></i>خطوات الحساب التفصيلية
+                            </div>
+                            <div>
+                                <button class="btn btn-sm btn-outline-light me-2" id="stepByStepBtn">
+                                    <i class="fas fa-footsteps me-1"></i> خطوة بخطوة
+                                </button>
+                                <button class="btn btn-sm btn-outline-light" id="autoCalculateBtn">
+                                    <i class="fas fa-bolt me-1"></i> حساب سريع
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="calculationSteps">
+                                <div class="alert alert-info">
+                                    <div class="d-flex">
+                                        <div class="me-3">
+                                            <i class="fas fa-calculator fa-2x text-info"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="alert-heading">مرحبًا بك في محرك الحسابات الانتخابية</h5>
+                                            <p class="mb-0">سيتم عرض خطوات الحساب التفصيلية هنا عند الضغط على زر "بدء الحسابات".</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 d-flex justify-content-between">
+                                <div>
+                                    <button class="btn btn-primary" id="calculateBtn">
+                                        <i class="fas fa-play-circle me-2"></i>بدء الحسابات
+                                    </button>
+                                    <button class="btn btn-outline-secondary ms-2" id="pauseResumeBtn" disabled>
+                                        <i class="fas fa-pause me-2"></i>إيقاف مؤقت
+                                    </button>
+                                </div>
+                                <div>
+                                    <button class="btn btn-outline-danger" id="resetBtn">
+                                        <i class="fas fa-redo me-2"></i>إعادة تعيين
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-chart-pie me-2"></i>نظرة سريعة على النتائج
+                        </div>
+                        <div class="card-body">
+                            <div id="quickResults">
+                                <div class="text-center py-4">
+                                    <i class="fas fa-poll fa-3x text-muted mb-3"></i>
+                                    <p class="text-muted">سيتم عرض النتائج هنا بعد إجراء الحسابات</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card stat-card">
+                        <div class="card-header">
+                            <i class="fas fa-chart-line me-2"></i>إحصائيات سريعة
+                        </div>
+                        <div class="card-body">
+                            <div class="row text-center">
+                                <div class="col-6 mb-3">
+                                    <div class="stat-box">
+                                        <h3 id="statVoters">10,000</h3>
+                                        <small class="text-muted">عدد الناخبين</small>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div class="stat-box">
+                                        <h3 id="statSeats">11</h3>
+                                        <small class="text-muted">عدد المقاعد</small>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="stat-box">
+                                        <h3 id="statParticipation">70%</h3>
+                                        <small class="text-muted">نسبة المشاركة</small>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="stat-box">
+                                        <h3 id="statValidVotes">6,650</h3>
+                                        <small class="text-muted">أصوات صحيحة</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم النتائج -->
+        <section id="results" class="mb-5 fade-in">
+            <h2 class="section-title">نتائج الانتخابات المفصلة</h2>
+            
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card results-card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <div>
+                                <i class="fas fa-poll me-2"></i>توزيع المقاعد والنتائج النهائية
+                            </div>
+                            <button class="btn btn-sm btn-print" id="printResultsBtn">
+                                <i class="fas fa-print me-1"></i> طباعة النتائج
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div id="resultsContainer">
+                                <div class="text-center py-5">
+                                    <i class="fas fa-chart-bar fa-4x text-muted mb-3"></i>
+                                    <h4 class="text-muted">نتائج الانتخابات</h4>
+                                    <p class="text-muted">سيتم عرض النتائج المفصلة هنا بعد إجراء الحسابات</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-trophy me-2"></i>الفائزون من عشيرة آل عودة
+                        </div>
+                        <div class="card-body">
+                            <div id="winnersContainer">
+                                <div class="text-center py-4">
+                                    <i class="fas fa-award fa-3x text-muted mb-3"></i>
+                                    <p class="text-muted">سيتم عرض قائمة الفائزين هنا</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-exclamation-triangle me-2"></i>التحذيرات والتوصيات
+                        </div>
+                        <div class="card-body">
+                            <div id="warningsContainer">
+                                <div class="text-center py-3">
+                                    <i class="fas fa-check-circle fa-2x text-success mb-2"></i>
+                                    <p class="text-muted">لا توجد تحذيرات حالياً</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- مخطط توزيع المقاعد -->
+            <div class="card mt-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <div>
+                        <i class="fas fa-chart-bar me-2"></i>مخطط توزيع المقاعد
+                    </div>
+                    <div>
+                        <button class="btn btn-sm btn-outline-primary me-2" id="exportChartBtn">
+                            <i class="fas fa-download me-1"></i> تصدير
+                        </button>
+                        <button class="btn btn-sm btn-outline-success" id="fullscreenChartBtn">
+                            <i class="fas fa-expand me-1"></i> توسيع
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <canvas id="seatsChart" height="200"></canvas>
+                        </div>
+                        <div class="col-md-4">
+                            <div id="chartLegend" class="mt-3">
+                                <!-- سيتم ملؤها ديناميكيًا -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم قاعدة البيانات -->
+        <section id="database" class="mb-5 fade-in">
+            <h2 class="section-title">قاعدة بيانات عشيرة آل عودة</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-server me-2"></i>البيانات المخزنة والنظام
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="text-primary fw-bold mb-3">
+                                <i class="fas fa-sitemap me-2"></i>الهيكل العام للنظام
+                            </h5>
+                            <p class="font-weight-medium">تم تصميم النظام بواسطة <span class="fw-bold text-accent">المهندس عمر أيمن عودة</span> ويتكون من:</p>
+                            <div class="list-group mb-4">
+                                <div class="list-group-item d-flex align-items-center">
+                                    <i class="fas fa-mouse-pointer text-primary me-3"></i>
+                                    <div>
+                                        <h6 class="mb-1">واجهة إدخال البيانات التفاعلية</h6>
+                                        <small class="text-muted">سهلة الاستخدام مع إمكانيات متقدمة</small>
+                                    </div>
+                                </div>
+                                <div class="list-group-item d-flex align-items-center">
+                                    <i class="fas fa-calculator text-success me-3"></i>
+                                    <div>
+                                        <h6 class="mb-1">محرك حسابي دقيق 100%</h6>
+                                        <small class="text-muted">يعتمد على خوارزميات رياضية معقدة</small>
+                                    </div>
+                                </div>
+                                <div class="list-group-item d-flex align-items-center">
+                                    <i class="fas fa-database text-info me-3"></i>
+                                    <div>
+                                        <h6 class="mb-1">قاعدة بيانات افتراضية للعشيرة</h6>
+                                        <small class="text-muted">تخزين كامل للمرشحين والنتائج</small>
+                                    </div>
+                                </div>
+                                <div class="list-group-item d-flex align-items-center">
+                                    <i class="fas fa-scale-balanced text-warning me-3"></i>
+                                    <div>
+                                        <h6 class="mb-1">خوارزميات تطبيق القانون بدقة</h6>
+                                        <small class="text-muted">تطبيق كامل لبنود القانون الفلسطيني</small>
+                                    </div>
+                                </div>
+                                <div class="list-group-item d-flex align-items-center">
+                                    <i class="fas fa-vote-yea text-danger me-3"></i>
+                                    <div>
+                                        <h6 class="mb-1">نظام تصويت يحاكي الواقع</h6>
+                                        <small class="text-muted">محاكاة دقيقة للعملية الانتخابية</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h5 class="text-success fw-bold mb-3">
+                                <i class="fas fa-star me-2"></i>مزايا النظام المتطور
+                            </h5>
+                            <div class="row">
+                                <div class="col-6 mb-3">
+                                    <div class="text-center p-3 border rounded-3 h-100">
+                                        <i class="fas fa-check-circle fa-2x text-success mb-2"></i>
+                                        <h6>دقة 100%</h6>
+                                        <small class="text-muted">حسابات دقيقة بدون أخطاء</small>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div class="text-center p-3 border rounded-3 h-100">
+                                        <i class="fas fa-print fa-2x text-primary mb-2"></i>
+                                        <h6>طباعة متكاملة</h6>
+                                        <small class="text-muted">تقارير مفصلة قابلة للطباعة</small>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-center p-3 border rounded-3 h-100">
+                                        <i class="fas fa-chart-line fa-2x text-warning mb-2"></i>
+                                        <h6>رسوم بيانية</h6>
+                                        <small class="text-muted">عرض مرئي للنتائج</small>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-center p-3 border rounded-3 h-100">
+                                        <i class="fas fa-mobile-alt fa-2x text-info mb-2"></i>
+                                        <h6>تجاوب تام</h6>
+                                        <small class="text-muted">يعمل على جميع الأجهزة</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <h5 class="text-warning fw-bold">
+                                    <i class="fas fa-sticky-note me-2"></i>ملاحظات تقنية
+                                </h5>
+                                <p class="font-weight-medium">النظام مصمم بلغات الويب القياسية (HTML, CSS, JavaScript) ويعمل على جميع المتصفحات الحديثة دون الحاجة إلى اتصال بالإنترنت بعد تحميل الصفحة.</p>
+                                <p>جميع الحسابات تتم في الوقت الفعلي وتستند إلى المعادلات الرياضية الدقيقة المذكورة في القانون.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 text-center">
+                        <button class="btn btn-print me-2" id="printSystemBtn">
+                            <i class="fas fa-print me-2"></i> طباعة وصف النظام
+                        </button>
+                        <button class="btn btn-outline-primary" id="exportDataBtn">
+                            <i class="fas fa-file-export me-2"></i> تصدير البيانات
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- الفوتر -->
+    <footer class="no-print">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5 class="fw-bold">نظام الانتخابات المحلية الفلسطينية</h5>
+                    <p>بناءً على القرار بقانون رقم (23) لسنة 2025م بشأن انتخاب مجالس الهيئات المحلية</p>
+                    <div class="mt-3">
+                        
+                        <a href="https://www.facebook.com/omar.owda.511896" class="text-light me-3">
+                            <i class="fab fa-facebook"><link rel="stylesheet" href="https://www.facebook.com/omar.owda.511896"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/omar-owda-912820280/?skipRedirect=true" class="text-light">
+                            <i class="fab fa-linkedin"><link rel="stylesheet" href="https://www.linkedin.com/in/omar-owda-912820280/?skipRedirect=true"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="fw-bold">روابط سريعة</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#intro">مقدمة النظام</a></li>
+                        <li class="mb-2"><a href="#data-input">إدخال البيانات</a></li>
+                        <li class="mb-2"><a href="#calculations">الحسابات</a></li>
+                        <li class="mb-2"><a href="#results">النتائج</a></li>
+                        <li><a href="SEGEL.html">قاعدة البيانات</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="fw-bold">قاعدة بيانات عشيرة آل عودة</h5>
+                    <p>تصميم وتطوير: <strong class="text-warning">المهندس عمر أيمن عودة</strong></p>
+                    <p class="mt-2">
+                        <i class="fas fa-calendar-alt me-2"></i>تم التحديث: فبراير 2026
+                    </p>
+                    <div class="mt-3">
+                        <button class="btn btn-outline-light btn-sm" id="contactBtn">
+                            <i class="fas fa-envelope me-1"></i> اتصل بنا
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <hr class="bg-light mt-0">
+            <div class="text-center pt-3">
+                <p class="mb-0">جميع الحسابات دقيقة 100% ومطابقة للقانون الفلسطيني للانتخابات المحلية</p>
+                <small class="text-light">©   اعداد وتصميم المهندس / عمر ايمن عوده (0566135007)    </small>
+            </div>
+        </div>
+    </footer>
+
+    <!-- نافذة الطباعة -->
+    <div class="modal fade" id="printModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">طباعة النتائج</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="printContent">
+                        <!-- سيتم ملؤها ديناميكيًا -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-print" onclick="window.print()">
+                        <i class="fas fa-print me-2"></i> طباعة الآن
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- مكتبات JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    
+    <script>
+        // البيانات الابتدائية
+        let electionData = {
+            type: "municipal",
+            votersCount: 10000,
+            seatsCount: 11,
+            participationRate: 70,
+            invalidVotesRate: 5,
+            listName: "قائمة عشيرة آل عودة",
+            listVotes: 2500,
+            requiredCandidates: 5,
+            womenQuota: true,
+            religiousQuota: false,
+            candidates: [
+                        {id: 1, name: "أحمد عودة", personalVotes: 800, gender: "male", religion: "مسلم"},
+                        {id: 2, name: "زينة عودة", personalVotes: 750, gender: "female", religion: "مسلم"},
+                        {id: 3, name: "محمد عودة", personalVotes: 720, gender: "male", religion: "مسلم"},
+                        {id: 4, name: "فاتن عودة", personalVotes: 680, gender: "female", religion: "مسلم"},
+                        {id: 5, name: "همام عودة", personalVotes: 650, gender: "male", religion: "مسلم"},
+                        {id: 6, name: "ليلى عودة", personalVotes: 630, gender: "female", religion: "مسلم"},
+                        {id: 7, name: "محمود عودة", personalVotes: 600, gender: "male", religion: "مسلم"},
+                        {id: 8, name: "نادية عودة", personalVotes: 580, gender: "female", religion: "مسلم"},
+                        {id: 9, name: "يوسف عودة", personalVotes: 550, gender: "male", religion: "مسلم"},
+                        {id: 10, name: "ريم عودة", personalVotes: 520, gender: "female", religion: "مسلم"},
+                        {id: 11, name: "زيد عودة", personalVotes: 500, gender: "male", religion: "مسلم"}
+            ],
+            competingLists: [
+                {id: 1, name: "قائمة التغيير", votes: 2000},
+                {id: 2, name: "قائمة الإصلاح", votes: 1500},
+                {id: 3, name: "قائمة المستقبل", votes: 1000}
+            ]
+        };
+
+        // متغيرات النظام
+        let seatsChart = null;
+        let currentStep = 0;
+        let calculationResults = null;
+        let isCalculating = false;
+        let calculationInterval = null;
+
+        // تهيئة الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            initializePage();
+            renderCandidatesTable();
+            renderCompetingLists();
+            updateStats();
+            updateHeaderStats();
+            setupEventListeners();
+            
+            // تطبيق تأثيرات الدخول
+            applyFadeInEffects();
+        });
+
+        // تهيئة الصفحة
+        function initializePage() {
+            // تعيين القيم الابتدائية
+            document.getElementById('electionType').value = electionData.type;
+            document.getElementById('votersCount').value = electionData.votersCount;
+            document.getElementById('seatsCount').value = electionData.seatsCount;
+            document.getElementById('participationRate').value = electionData.participationRate;
+            document.getElementById('participationValue').textContent = `${electionData.participationRate}%`;
+            document.getElementById('invalidVotes').value = electionData.invalidVotesRate;
+            document.getElementById('invalidValue').textContent = `${electionData.invalidVotesRate}%`;
+            document.getElementById('listName').value = electionData.listName;
+            document.getElementById('listVotes').value = electionData.listVotes;
+            document.getElementById('requiredCandidates').value = electionData.requiredCandidates;
+            document.getElementById('womenQuota').checked = electionData.womenQuota;
+            document.getElementById('religiousQuota').checked = electionData.religiousQuota;
+            
+            // إظهار/إخفاء قسم القوائم المنافسة
+            toggleCompetingListsSection();
+        }
+
+        // تطبيق تأثيرات الدخول
+        function applyFadeInEffects() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.opacity = 1;
+                    el.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        }
+
+        // إعداد مستمعي الأحداث
+        function setupEventListeners() {
+            // تحديث البيانات
+            document.getElementById('updateData').addEventListener('click', updateElectionData);
+            
+            // تحديث قيم الشرائط
+            document.getElementById('participationRate').addEventListener('input', function() {
+                document.getElementById('participationValue').textContent = `${this.value}%`;
+            });
+            
+            document.getElementById('invalidVotes').addEventListener('input', function() {
+                document.getElementById('invalidValue').textContent = `${this.value}%`;
+            });
+            
+            // تغيير نوع الانتخابات
+            document.getElementById('electionType').addEventListener('change', toggleCompetingListsSection);
+            
+            // إضافة مرشح جديد
+            document.getElementById('addCandidateBtn').addEventListener('click', addNewCandidate);
+            
+            // تعبئة المرشحين تلقائياً
+            document.getElementById('autoFillCandidates').addEventListener('click', autoFillCandidates);
+            
+            // إضافة قائمة منافسة جديدة
+            document.getElementById('addListBtn').addEventListener('click', addNewCompetingList);
+            
+            // بدء الحسابات
+            document.getElementById('calculateBtn').addEventListener('click', startCalculations);
+            
+            // الحساب السريع
+            document.getElementById('autoCalculateBtn').addEventListener('click', autoCalculate);
+            
+            // خطوة بخطوة
+            document.getElementById('stepByStepBtn').addEventListener('click', stepByStepCalculation);
+            
+            // إيقاف/استئناف الحساب
+            document.getElementById('pauseResumeBtn').addEventListener('click', togglePauseResume);
+            
+            // إعادة تعيين
+            document.getElementById('resetBtn').addEventListener('click', resetToDefaults);
+            
+            // طباعة النتائج
+            document.getElementById('printResultsBtn').addEventListener('click', printResults);
+            
+            // زر الطباعة العائم
+            document.getElementById('printBtn').addEventListener('click', showPrintModal);
+            document.getElementById('navbarPrintBtn').addEventListener('click', showPrintModal);
+            
+            // طباعة وصف النظام
+            document.getElementById('printSystemBtn').addEventListener('click', printSystemDescription);
+            
+            // تصدير البيانات
+            document.getElementById('exportDataBtn').addEventListener('click', exportData);
+            
+            // تصدير المخطط
+            document.getElementById('exportChartBtn').addEventListener('click', exportChart);
+            
+            // توسيع المخطط
+            document.getElementById('fullscreenChartBtn').addEventListener('click', toggleFullscreenChart);
+            
+            // الدليل الإرشادي
+            document.getElementById('startGuide').addEventListener('click', startGuide);
+            
+            // التجربة السريعة
+            document.getElementById('quickDemo').addEventListener('click', quickDemo);
+            
+            // مساعدة
+            document.getElementById('helpGeneralBtn').addEventListener('click', showGeneralHelp);
+            document.getElementById('helpListBtn').addEventListener('click', showListHelp);
+            
+            // اتصال بنا
+            document.getElementById('contactBtn').addEventListener('click', showContactModal);
+        }
+
+        // تحديث بيانات الانتخاب
+        function updateElectionData() {
+            electionData.type = document.getElementById('electionType').value;
+            electionData.votersCount = parseInt(document.getElementById('votersCount').value);
+            electionData.seatsCount = parseInt(document.getElementById('seatsCount').value);
+            electionData.participationRate = parseInt(document.getElementById('participationRate').value);
+            electionData.invalidVotesRate = parseInt(document.getElementById('invalidVotes').value);
+            electionData.listName = document.getElementById('listName').value;
+            electionData.listVotes = parseInt(document.getElementById('listVotes').value);
+            electionData.requiredCandidates = parseInt(document.getElementById('requiredCandidates').value);
+            electionData.womenQuota = document.getElementById('womenQuota').checked;
+            electionData.religiousQuota = document.getElementById('religiousQuota').checked;
+            
+            updateStats();
+            updateHeaderStats();
+            
+            // عرض رسالة نجاح
+            showAlert('تم تحديث البيانات بنجاح!', 'success', 3000);
+        }
+
+        // تحديث الإحصائيات السريعة
+        function updateStats() {
+            const totalVotesCast = Math.floor(electionData.votersCount * (electionData.participationRate / 100));
+            const invalidVotes = Math.floor(totalVotesCast * (electionData.invalidVotesRate / 100));
+            const validVotes = totalVotesCast - invalidVotes;
+            
+            document.getElementById('statVoters').textContent = electionData.votersCount.toLocaleString();
+            document.getElementById('statSeats').textContent = electionData.seatsCount;
+            document.getElementById('statParticipation').textContent = `${electionData.participationRate}%`;
+            document.getElementById('statValidVotes').textContent = validVotes.toLocaleString();
+        }
+
+        // تحديث إحصائيات الرأس
+        function updateHeaderStats() {
+            document.getElementById('headerSeats').textContent = electionData.seatsCount;
+            document.getElementById('headerVoters').textContent = electionData.votersCount.toLocaleString();
+            document.getElementById('headerCandidates').textContent = electionData.candidates.length;
+        }
+
+        // إظهار/إخفاء قسم القوائم المنافسة
+        function toggleCompetingListsSection() {
+            const electionType = document.getElementById('electionType').value;
+            const competingListsSection = document.getElementById('competingListsSection');
+            
+            if (electionType === 'municipal') {
+                competingListsSection.style.display = 'block';
+            } else {
+                competingListsSection.style.display = 'none';
+            }
+        }
+
+        // عرض جدول المرشحين
+        function renderCandidatesTable() {
+            const tbody = document.getElementById('candidatesBody');
+            tbody.innerHTML = '';
+            
+            electionData.candidates.forEach(candidate => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${candidate.id}</td>
+                    <td class="fw-medium">${candidate.name}</td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <span class="me-2">${candidate.personalVotes.toLocaleString()}</span>
+                            <div class="percentage-bar flex-grow-1">
+                                <div class="percentage-fill" style="width: ${(candidate.personalVotes / 1000) * 100}%"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="badge ${candidate.gender === 'male' ? 'bg-primary' : 'bg-warning'}">
+                            ${candidate.gender === 'male' ? 'ذكر' : 'أنثى'}
+                        </span>
+                    </td>
+                    <td>${candidate.religion || '-'}</td>
+                    <td>
+                        <button class="btn btn-sm btn-danger" onclick="deleteCandidate(${candidate.id})" title="حذف">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+            
+            // تحديث عدد المرشحين
+            document.getElementById('candidatesCount').textContent = `${electionData.candidates.length} مرشح`;
+        }
+
+        // إضافة مرشح جديد
+        function addNewCandidate() {
+            const newId = electionData.candidates.length > 0 ? 
+                Math.max(...electionData.candidates.map(c => c.id)) + 1 : 1;
+            
+            const gender = Math.random() > 0.5 ? 'male' : 'female';
+            const religions = ['مسلم', 'مسيحي'];
+            const names = ['سعيد', 'علي', 'حسن', 'مريم', 'هدى', 'نور', 'باسل', 'ولاء', 'عماد', 'سلمى'];
+            
+            const newCandidate = {
+                id: newId,
+                name: `${names[Math.floor(Math.random() * names.length)]} عودة`,
+                personalVotes: Math.floor(Math.random() * 300) + 400,
+                gender: gender,
+                religion: religions[Math.floor(Math.random() * religions.length)]
+            };
+            
+            electionData.candidates.push(newCandidate);
+            renderCandidatesTable();
+            updateHeaderStats();
+            showAlert('تم إضافة مرشح جديد بنجاح!', 'success', 2000);
+        }
+
+        // تعبئة المرشحين تلقائياً
+        function autoFillCandidates() {
+            const currentCount = electionData.candidates.length;
+            const needed = electionData.seatsCount - currentCount;
+            
+            if (needed <= 0) {
+                showAlert('عدد المرشحين الحالي يكفي لعدد مقاعد المجلس!', 'info', 3000);
+                return;
+            }
+            
+            for (let i = 0; i < needed; i++) {
+                addNewCandidate();
+            }
+            
+            showAlert(`تمت إضافة ${needed} مرشح(ين) تلقائياً!`, 'success', 3000);
+        }
+
+        // حذف مرشح
+        function deleteCandidate(id) {
+            if (electionData.candidates.length <= 1) {
+                showAlert('يجب أن تحتوي القائمة على مرشح واحد على الأقل!', 'danger', 3000);
+                return;
+            }
+            
+            electionData.candidates = electionData.candidates.filter(c => c.id !== id);
+            renderCandidatesTable();
+            updateHeaderStats();
+            showAlert('تم حذف المرشح بنجاح!', 'warning', 2000);
+        }
+
+        // عرض القوائم المنافسة
+        function renderCompetingLists() {
+            const tbody = document.getElementById('competingListsBody');
+            tbody.innerHTML = '';
+            
+            // حساب إجمالي الأصوات
+            const totalVotes = electionData.listVotes + 
+                electionData.competingLists.reduce((sum, list) => sum + list.votes, 0);
+            
+            electionData.competingLists.forEach(list => {
+                const percentage = totalVotes > 0 ? ((list.votes / totalVotes) * 100).toFixed(1) : 0;
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="fw-medium">${list.name}</td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <span class="me-2">${list.votes.toLocaleString()}</span>
+                            <div class="percentage-bar flex-grow-1">
+                                <div class="percentage-fill" style="width: ${percentage}%"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="fw-bold">${percentage}%</td>
+                    <td>
+                        <button class="btn btn-sm btn-danger" onclick="deleteCompetingList(${list.id})" title="حذف">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+            
+            // تحديث عدد القوائم المنافسة
+            document.getElementById('competingListsCount').textContent = `${electionData.competingLists.length} قوائم`;
+        }
+
+        // إضافة قائمة منافسة جديدة
+        function addNewCompetingList() {
+            const nameInput = document.getElementById('newListName');
+            const votesInput = document.getElementById('newListVotes');
+            
+            if (!nameInput.value.trim()) {
+                showAlert('يرجى إدخال اسم القائمة!', 'danger', 3000);
+                nameInput.focus();
+                return;
+            }
+            
+            if (!votesInput.value || parseInt(votesInput.value) <= 0) {
+                showAlert('يرجى إدخال عدد أصوات صحيح!', 'danger', 3000);
+                votesInput.focus();
+                return;
+            }
+            
+            const newId = electionData.competingLists.length > 0 ? 
+                Math.max(...electionData.competingLists.map(l => l.id)) + 1 : 1;
+            
+            const newList = {
+                id: newId,
+                name: nameInput.value,
+                votes: parseInt(votesInput.value)
+            };
+            
+            electionData.competingLists.push(newList);
+            renderCompetingLists();
+            
+            // مسح الحقول
+            nameInput.value = '';
+            votesInput.value = '';
+            
+            showAlert('تم إضافة قائمة منافسة جديدة بنجاح!', 'success', 2000);
+        }
+
+        // حذف قائمة منافسة
+        function deleteCompetingList(id) {
+            electionData.competingLists = electionData.competingLists.filter(l => l.id !== id);
+            renderCompetingLists();
+            showAlert('تم حذف القائمة المنافسة بنجاح!', 'warning', 2000);
+        }
+
+        // بدء الحسابات
+        function startCalculations() {
+            if (isCalculating) {
+                showAlert('جارٍ إجراء الحسابات بالفعل!', 'info', 2000);
+                return;
+            }
+            
+            isCalculating = true;
+            document.getElementById('pauseResumeBtn').disabled = false;
+            
+            // إعادة تعيين المتغيرات
+            currentStep = 0;
+            calculationResults = {
+                totalVotes: 0,
+                validVotes: 0,
+                threshold: 0,
+                qualifiedLists: [],
+                seatsDistribution: {},
+                ourListSeats: 0,
+                ourWinners: [],
+                quotaAdjustments: [],
+                warnings: []
+            };
+            
+            // عرض خطوات الحساب
+            const stepsContainer = document.getElementById('calculationSteps');
+            stepsContainer.innerHTML = `
+                <div class="alert alert-info">
+                    <div class="d-flex align-items-center">
+                        <div class="me-3">
+                            <i class="fas fa-cog fa-spin fa-2x"></i>
+                        </div>
+                        <div>
+                            <h5 class="alert-heading">جارٍ إجراء الحسابات الانتخابية...</h5>
+                            <p class="mb-0">سيتم عرض التفاصيل خطوة بخطوة</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="progress mb-4" style="height: 12px;">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" id="calculationProgress" style="width: 0%"></div>
+                </div>
+                <div id="stepsDetails"></div>
+            `;
+            
+            // بدء الحسابات خطوة بخطوة
+            simulateCalculationSteps();
+        }
+
+        // الحساب السريع
+        function autoCalculate() {
+            // إعادة تعيين المتغيرات
+            currentStep = 0;
+            calculationResults = {
+                totalVotes: 0,
+                validVotes: 0,
+                threshold: 0,
+                qualifiedLists: [],
+                seatsDistribution: {},
+                ourListSeats: 0,
+                ourWinners: [],
+                quotaAdjustments: [],
+                warnings: []
+            };
+            
+            // تنفيذ جميع الخطوات دفعة واحدة
+            calculateTotalVotes();
+            applyThreshold();
+            distributeSeatsSaintLague();
+            determineWinnersInList();
+            applyWomenQuota();
+            
+            // عرض النتائج النهائية مباشرة
+            displayFinalResults();
+            
+            showAlert('تم إجراء الحسابات السريعة بنجاح!', 'success', 2000);
+        }
+
+        // الحساب خطوة بخطوة
+        function stepByStepCalculation() {
+            if (isCalculating) {
+                showAlert('جارٍ إجراء الحسابات بالفعل!', 'info', 2000);
+                return;
+            }
+            
+            startCalculations();
+        }
+
+        // إيقاف/استئناف الحساب
+        function togglePauseResume() {
+            const btn = document.getElementById('pauseResumeBtn');
+            
+            if (btn.innerHTML.includes('إيقاف مؤقت')) {
+                clearInterval(calculationInterval);
+                btn.innerHTML = '<i class="fas fa-play me-2"></i>استئناف';
+                showAlert('تم إيقاف الحسابات مؤقتاً', 'warning', 2000);
+            } else {
+                simulateCalculationSteps();
+                btn.innerHTML = '<i class="fas fa-pause me-2"></i>إيقاف مؤقت';
+                showAlert('تم استئناف الحسابات', 'success', 2000);
+            }
+        }
+
+        // محاكاة خطوات الحساب
+        function simulateCalculationSteps() {
+            const steps = [
+                {title: "حساب إجمالي الأصوات", func: calculateTotalVotes},
+                {title: "تطبيق نسبة الحسم (5%)", func: applyThreshold},
+                {title: "توزيع المقاعد بطريقة سانت لوجي", func: distributeSeatsSaintLague},
+                {title: "تحديد الفائزين داخل القائمة", func: determineWinnersInList},
+                {title: "مراعاة الكوتا النسائية", func: applyWomenQuota},
+                {title: "توليد النتائج النهائية", func: generateFinalResults}
+            ];
+            
+            // مسح الخطوات السابقة
+            const stepsDetails = document.getElementById('stepsDetails');
+            stepsDetails.innerHTML = '';
+            
+            // تنفيذ الخطوات واحدة تلو الأخرى
+            function executeStep(index) {
+                if (index >= steps.length) {
+                    // انتهاء الحسابات
+                    isCalculating = false;
+                    document.getElementById('calculationProgress').style.width = '100%';
+                    document.getElementById('pauseResumeBtn').disabled = true;
+                    document.getElementById('pauseResumeBtn').innerHTML = '<i class="fas fa-pause me-2"></i>إيقاف مؤقت';
+                    
+                    displayFinalResults();
+                    showAlert('تم الانتهاء من جميع الحسابات بنجاح!', 'success', 3000);
+                    return;
+                }
+                
+                currentStep = index;
+                const progress = ((currentStep + 1) / steps.length) * 100;
+                document.getElementById('calculationProgress').style.width = `${progress}%`;
+                
+                // عرض تفاصيل الخطوة الحالية
+                const stepDiv = document.createElement('div');
+                stepDiv.className = 'card mb-3 fade-in';
+                stepDiv.style.animationDelay = `${index * 0.1}s`;
+                stepDiv.innerHTML = `
+                    <div class="card-body">
+                        <h6 class="card-title d-flex align-items-center">
+                            <span class="badge bg-primary me-2">${currentStep + 1}</span>
+                            ${steps[currentStep].title}
+                            <i class="fas fa-check-circle text-success ms-auto" id="step-${currentStep}-icon" style="opacity: 0"></i>
+                        </h6>
+                        <div id="step-${currentStep}-details"></div>
+                    </div>
+                `;
+                stepsDetails.appendChild(stepDiv);
+                
+                // تنفيذ دالة الخطوة
+                const result = steps[currentStep].func();
+                document.getElementById(`step-${currentStep}-details`).innerHTML = result.message;
+                
+                // عرض علامة الإكمال
+                setTimeout(() => {
+                    const icon = document.getElementById(`step-${currentStep}-icon`);
+                    if (icon) icon.style.opacity = 1;
+                }, 500);
+                
+                // الانتقال إلى الخطوة التالية بعد تأخير
+                calculationInterval = setTimeout(() => executeStep(index + 1), 1500);
+            }
+            
+            // بدء التنفيذ
+            executeStep(0);
+        }
+
+        // الخطوة 1: حساب إجمالي الأصوات
+        function calculateTotalVotes() {
+            const totalVotesCast = Math.floor(electionData.votersCount * (electionData.participationRate / 100));
+            const invalidVotes = Math.floor(totalVotesCast * (electionData.invalidVotesRate / 100));
+            const validVotes = totalVotesCast - invalidVotes;
+            
+            calculationResults.totalVotes = totalVotesCast;
+            calculationResults.validVotes = validVotes;
+            
+            let message = `
+                <div class="row">
+                    <div class="col-md-6">
+                        <table class="table table-sm">
+                            <tr>
+                                <th>إجمالي الناخبين:</th>
+                                <td class="fw-bold">${electionData.votersCount.toLocaleString()}</td>
+                            </tr>
+                            <tr>
+                                <th>نسبة المشاركة:</th>
+                                <td class="fw-bold text-primary">${electionData.participationRate}%</td>
+                            </tr>
+                            <tr>
+                                <th>إجمالي المصوتين:</th>
+                                <td>${totalVotesCast.toLocaleString()}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <table class="table table-sm">
+                            <tr>
+                                <th>نسبة الأصوات الباطلة:</th>
+                                <td class="fw-bold text-primary">${electionData.invalidVotesRate}%</td>
+                            </tr>
+                            <tr>
+                                <th>عدد الأصوات الباطلة:</th>
+                                <td>${invalidVotes.toLocaleString()}</td>
+                            </tr>
+                            <tr class="table-success">
+                                <th>الأصوات الصحيحة الإجمالية:</th>
+                                <td class="fw-bold">${validVotes.toLocaleString()}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            `;
+            
+            return {message};
+        }
+
+        // الخطوة 2: تطبيق نسبة الحسم (5%)
+        function applyThreshold() {
+            const threshold = Math.floor(calculationResults.validVotes * 0.05);
+            calculationResults.threshold = threshold;
+            
+            // جمع أصوات جميع القوائم
+            const allLists = [
+                {name: electionData.listName, votes: electionData.listVotes, isOurList: true},
+                ...electionData.competingLists.map(list => ({name: list.name, votes: list.votes, isOurList: false}))
+            ];
+            
+            // تصفية القوائم التي تجاوزت نسبة الحسم
+            calculationResults.qualifiedLists = allLists.filter(list => list.votes >= threshold);
+            const disqualifiedLists = allLists.filter(list => list.votes < threshold);
+            
+            let message = `
+                <p><span class="fw-bold">نسبة الحسم القانونية:</span> <span class="badge bg-danger">5%</span> من الأصوات الصحيحة</p>
+                <p><span class="fw-bold">عتبة الحسم:</span> <span class="badge bg-primary">${threshold.toLocaleString()} صوت</span></p>
+                
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <div class="alert alert-success">
+                            <h6><i class="fas fa-check-circle me-2"></i>القوائم المؤهلة</h6>
+                            <p class="fw-bold">${calculationResults.qualifiedLists.length} قائمة</p>
+                            <ul class="mb-0">
+                                ${calculationResults.qualifiedLists.map(list => 
+                                    `<li><span class="fw-medium">${list.name}:</span> ${list.votes.toLocaleString()} صوت ${list.isOurList ? '<span class="badge bg-success">قائمتنا</span>' : ''}</li>`
+                                ).join('')}
+                            </ul>
+                        </div>
+                    </div>
+            `;
+            
+            if (disqualifiedLists.length > 0) {
+                message += `
+                    <div class="col-md-6">
+                        <div class="alert alert-danger">
+                            <h6><i class="fas fa-times-circle me-2"></i>القوائم المستبعدة</h6>
+                            <p class="fw-bold">${disqualifiedLists.length} قائمة</p>
+                            <ul class="mb-0">
+                                ${disqualifiedLists.map(list => 
+                                    `<li><span class="fw-medium">${list.name}:</span> ${list.votes.toLocaleString()} صوت <span class="text-danger">(أقل من العتبة)</span></li>`
+                                ).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                `;
+                
+                // إضافة تحذير إذا كانت قائمتنا مستبعدة
+                if (disqualifiedLists.some(list => list.isOurList)) {
+                    calculationResults.warnings.push("قائمة عشيرة آل عودة لم تتجاوز نسبة الحسم (5%) ولن تحصل على أي مقاعد!");
+                }
+            } else {
+                message += `<div class="col-md-6"></div>`;
+            }
+            
+            message += `</div>`;
+            
+            // التحقق من تأهل قائمتنا
+            const ourListQualified = calculationResults.qualifiedLists.some(list => list.isOurList);
+            if (!ourListQualified) {
+                calculationResults.warnings.push("قائمة عشيرة آل عودة لم تتجاوز نسبة الحسم (5%) ولن تحصل على أي مقاعد!");
+            }
+            
+            return {message};
+        }
+
+        // الخطوة 3: توزيع المقاعد بطريقة سانت لوجي
+        function distributeSeatsSaintLague() {
+            // تطبيق طريقة سانت لوجي
+            const seats = electionData.seatsCount;
+            const qualifiedLists = [...calculationResults.qualifiedLists];
+            
+            // إذا لم تكن هناك قوائم مؤهلة
+            if (qualifiedLists.length === 0) {
+                calculationResults.seatsDistribution = {};
+                
+                return {
+                    message: `<div class="alert alert-danger">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <strong>لا توجد قوائم مؤهلة لتوزيع المقاعد!</strong>
+                    </div>`
+                };
+            }
+            
+            // إذا كانت قائمة واحدة فقط مؤهلة
+            if (qualifiedLists.length === 1) {
+                calculationResults.seatsDistribution = {
+                    [qualifiedLists[0].name]: seats
+                };
+                calculationResults.ourListSeats = qualifiedLists[0].isOurList ? seats : 0;
+                
+                return {
+                    message: `
+                        <div class="alert alert-warning">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <strong>قائمة واحدة مؤهلة فقط:</strong> ${qualifiedLists[0].name}
+                        </div>
+                        <div class="alert alert-success">
+                            <h5><i class="fas fa-trophy me-2"></i>تحصل على جميع المقاعد: ${seats} مقاعد</h5>
+                        </div>
+                    `
+                };
+            }
+            
+            // تطبيق طريقة سانت لوجي
+            const quotients = [];
+            
+            // توليد كسور سانت لوجي لكل قائمة
+            qualifiedLists.forEach(list => {
+                for (let divisor = 1; divisor <= seats * 2; divisor += 2) {
+                    const quotient = list.votes / divisor;
+                    quotients.push({
+                        listName: list.name,
+                        isOurList: list.isOurList,
+                        quotient: quotient,
+                        divisor: divisor
+                    });
+                }
+            });
+            
+            // ترتيب الكسور تنازلياً
+            quotients.sort((a, b) => b.quotient - a.quotient);
+            
+            // أخذ أعلى "مقاعد" كسور
+            const topQuotients = quotients.slice(0, seats);
+            
+            // حساب عدد المقاعد لكل قائمة
+            const seatCounts = {};
+            qualifiedLists.forEach(list => {
+                seatCounts[list.name] = 0;
+            });
+            
+            topQuotients.forEach(q => {
+                seatCounts[q.listName]++;
+                if (q.isOurList) {
+                    calculationResults.ourListSeats++;
+                }
+            });
+            
+            calculationResults.seatsDistribution = seatCounts;
+            
+            // إنشاء رسالة تفصيلية
+            let message = `
+                <p><span class="fw-bold">طريقة التوزيع:</span> <span class="badge bg-info">سانت لوجي</span> (القسمة على أرقام فردية: 1, 3, 5, ...)</p>
+                <p><span class="fw-bold">عدد المقاعد المطلوب توزيعها:</span> ${seats}</p>
+                
+                <div class="table-responsive mt-3">
+                    <table class="table table-sm table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>الترتيب</th>
+                                <th>القائمة</th>
+                                <th>القيمة (الأصوات ÷ المقسوم عليه)</th>
+                                <th>المقعد</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+            
+            topQuotients.forEach((q, index) => {
+                const listVotes = q.listName === electionData.listName ? 
+                    electionData.listVotes : 
+                    electionData.competingLists.find(l => l.name === q.listName)?.votes;
+                
+                message += `
+                    <tr ${q.isOurList ? 'class="table-success"' : ''}>
+                        <td class="fw-bold">${index + 1}</td>
+                        <td>
+                            ${q.listName} 
+                            ${q.isOurList ? '<span class="badge bg-success ms-2">قائمتنا</span>' : ''}
+                        </td>
+                        <td>${Math.round(q.quotient).toLocaleString()} 
+                            <small class="text-muted">(${listVotes?.toLocaleString()} ÷ ${q.divisor})</small>
+                        </td>
+                        <td><span class="badge bg-primary">مقعد ${index + 1}</span></td>
+                    </tr>
+                `;
+            });
+            
+            message += `
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="alert alert-success mt-3">
+                    <h6><i class="fas fa-chart-pie me-2"></i>توزيع المقاعد النهائي</h6>
+                    <div class="row">
+            `;
+            
+            for (const listName in seatCounts) {
+                const isOurList = listName === electionData.listName;
+                const seatsCount = seatCounts[listName];
+                const percentage = ((seatsCount / seats) * 100).toFixed(1);
+                
+                message += `
+                    <div class="col-md-6 mb-2">
+                        <div class="d-flex justify-content-between align-items-center p-2 border rounded ${isOurList ? 'bg-success bg-opacity-10' : ''}">
+                            <div>
+                                <span class="fw-bold">${listName}</span>
+                                ${isOurList ? '<span class="badge bg-success ms-2">قائمتنا</span>' : ''}
+                            </div>
+                            <div>
+                                <span class="badge bg-primary">${seatsCount} مقاعد</span>
+                                <small class="text-muted ms-2">${percentage}%</small>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            message += `</div></div>`;
+            
+            return {message};
+        }
+
+        // الخطوة 4: تحديد الفائزين داخل القائمة
+        function determineWinnersInList() {
+            // إذا لم تحصل قائمتنا على مقاعد
+            if (calculationResults.ourListSeats === 0) {
+                calculationResults.ourWinners = [];
+                
+                return {
+                    message: `<div class="alert alert-danger">
+                        <i class="fas fa-times-circle me-2"></i>
+                        <strong>قائمة عشيرة آل عودة لم تحصل على أي مقاعد!</strong>
+                    </div>`
+                };
+            }
+            
+            // ترتيب المرشحين تنازلياً حسب الأصوات الشخصية
+            const sortedCandidates = [...electionData.candidates].sort((a, b) => b.personalVotes - a.personalVotes);
+            
+            // أخذ أعلى المرشحين حسب عدد المقاعد التي حصلت عليها القائمة
+            const winners = sortedCandidates.slice(0, calculationResults.ourListSeats);
+            calculationResults.ourWinners = winners;
+            
+            // التحقق مما إذا كان عدد الفائزين يلبي العدد المطلوب
+            if (winners.length < electionData.requiredCandidates) {
+                calculationResults.warnings.push(`عدد الفائزين من عشيرة آل عودة (${winners.length}) أقل من العدد المطلوب (${electionData.requiredCandidates})`);
+            }
+            
+            let message = `
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>عدد المقاعد التي حصلت عليها قائمتنا:</strong> ${calculationResults.ourListSeats}
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="table table-sm table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>الترتيب</th>
+                                <th>اسم المرشح</th>
+                                <th>الأصوات الشخصية</th>
+                                <th>الجنس</th>
+                                <th>الحالة</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+            
+            sortedCandidates.forEach((candidate, index) => {
+                const isWinner = index < calculationResults.ourListSeats;
+                message += `
+                    <tr ${isWinner ? 'class="table-success"' : ''}>
+                        <td class="fw-bold">${index + 1}</td>
+                        <td>${candidate.name}</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <span class="me-2">${candidate.personalVotes.toLocaleString()}</span>
+                                <div class="percentage-bar flex-grow-1">
+                                    <div class="percentage-fill" style="width: ${(candidate.personalVotes / 1000) * 100}%"></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="badge ${candidate.gender === 'male' ? 'bg-primary' : 'bg-warning'}">
+                                ${candidate.gender === 'male' ? 'ذكر' : 'أنثى'}
+                            </span>
+                        </td>
+                        <td>
+                            ${isWinner ? 
+                                '<span class="badge bg-success"><i class="fas fa-trophy me-1"></i> فائز</span>' : 
+                                '<span class="badge bg-secondary">غير فائز</span>'
+                            }
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            message += `
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="alert alert-success mt-3">
+                    <h6><i class="fas fa-award me-2"></i>الفائزون من قائمتنا</h6>
+                    <p class="fw-bold mb-2">${winners.map(w => w.name).join('، ')}</p>
+                </div>
+            `;
+            
+            return {message};
+        }
+
+        // الخطوة 5: مراعاة الكوتا النسائية
+        function applyWomenQuota() {
+            if (!electionData.womenQuota || calculationResults.ourListSeats === 0) {
+                calculationResults.quotaAdjustments = [];
+                
+                return {
+                    message: `<div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        ${electionData.womenQuota ? 
+                            'قائمتنا لم تحصل على مقاعد، لا حاجة لتطبيق الكوتا' : 
+                            'الكوتا النسائية غير مفعلة'
+                        }
+                    </div>`
+                };
+            }
+            
+            // حساب الحد الأدنى المطلوب للنساء حسب حجم المجلس
+            let minWomenRequired = 0;
+            switch(electionData.seatsCount) {
+                case 9: minWomenRequired = 2; break;
+                case 11: minWomenRequired = 3; break;
+                case 13: 
+                case 15: minWomenRequired = 4; break;
+            }
+            
+            // حساب عدد النساء الفائزات حالياً
+            const currentWomenWinners = calculationResults.ourWinners.filter(w => w.gender === 'female').length;
+            
+            // إذا كان عدد النساء الفائزات يلبي الحد الأدنى
+            if (currentWomenWinners >= minWomenRequired) {
+                calculationResults.quotaAdjustments = [];
+                
+                return {
+                    message: `
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="alert alert-success">
+                                    <h6><i class="fas fa-check-circle me-2"></i>الكوتا النسائية</h6>
+                                    <p class="mb-1"><strong>الحد الأدنى المطلوب:</strong> ${minWomenRequired} مقاعد</p>
+                                    <p class="mb-1"><strong>عدد النساء الفائزات:</strong> ${currentWomenWinners}</p>
+                                    <p class="fw-bold mb-0">✅ تم تحقيق الكوتا النسائية دون حاجة لتعديل</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="alert alert-light">
+                                    <h6><i class="fas fa-chart-bar me-2"></i>التوزيع الحالي</h6>
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span>النساء الفائزات:</span>
+                                        <span class="fw-bold">${currentWomenWinners}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span>الرجال الفائزين:</span>
+                                        <span class="fw-bold">${calculationResults.ourWinners.length - currentWomenWinners}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                };
+            }
+            
+            // إذا لم يتم تحقيق الكوتا، نحتاج إلى تعديل
+            const womenNeeded = minWomenRequired - currentWomenWinners;
+            const adjustments = [];
+            
+            // الحصول على قائمة المرشحين غير الفائزين من الإناث
+            const allCandidates = [...electionData.candidates].sort((a, b) => b.personalVotes - a.personalVotes);
+            const currentWinners = calculationResults.ourWinners;
+            const nonWinningWomen = allCandidates.filter(c => 
+                c.gender === 'female' && !currentWinners.some(w => w.id === c.id)
+            ).sort((a, b) => b.personalVotes - a.personalVotes);
+            
+            // الحصول على قائمة المرشحين الفائزين الذكور (مرتبة من الأقل أصواتًا)
+            const maleWinners = currentWinners.filter(w => w.gender === 'male')
+                .sort((a, b) => a.personalVotes - b.personalVotes);
+            
+            // استبدال الذكور الأقل أصواتًا بالإناث الأعلى أصواتًا من غير الفائزات
+            for (let i = 0; i < Math.min(womenNeeded, maleWinners.length, nonWinningWomen.length); i++) {
+                const maleToReplace = maleWinners[i];
+                const womanToAdd = nonWinningWomen[i];
+                
+                adjustments.push({
+                    removed: maleToReplace,
+                    added: womanToAdd,
+                    reason: "تطبيق الكوتا النسائية"
+                });
+                
+                // تحديث قائمة الفائزين
+                const maleIndex = calculationResults.ourWinners.findIndex(w => w.id === maleToReplace.id);
+                if (maleIndex !== -1) {
+                    calculationResults.ourWinners[maleIndex] = womanToAdd;
+                }
+            }
+            
+            calculationResults.quotaAdjustments = adjustments;
+            
+            let message = `
+                <div class="alert alert-warning">
+                    <h6><i class="fas fa-exclamation-triangle me-2"></i>الكوتا النسائية</h6>
+                    <p class="mb-1"><strong>الحد الأدنى المطلوب:</strong> ${minWomenRequired} مقاعد</p>
+                    <p class="mb-1"><strong>عدد النساء الفائزات حالياً:</strong> ${currentWomenWinners}</p>
+                    <p class="mb-1"><strong>عدد النساء المطلوب إضافتها:</strong> ${womenNeeded}</p>
+                </div>
+            `;
+            
+            if (adjustments.length > 0) {
+                message += `
+                    <div class="alert alert-success">
+                        <h6><i class="fas fa-exchange-alt me-2"></i>التعديلات المطلوبة لتطبيق الكوتا</h6>
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>يتم استبدال</th>
+                                        <th>يتم إضافة</th>
+                                        <th>السبب</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                `;
+                
+                adjustments.forEach((adj, index) => {
+                    message += `
+                        <tr>
+                            <td>${index + 1}</td>
+                            <td>
+                                <span class="badge bg-danger">${adj.removed.name}</span>
+                                <small class="text-muted d-block">(${adj.removed.gender === 'male' ? 'ذكر' : 'أنثى'}, ${adj.removed.personalVotes} صوت)</small>
+                            </td>
+                            <td>
+                                <span class="badge bg-success">${adj.added.name}</span>
+                                <small class="text-muted d-block">(${adj.added.gender === 'male' ? 'ذكر' : 'أنثى'}, ${adj.added.personalVotes} صوت)</small>
+                            </td>
+                            <td>${adj.reason}</td>
+                        </tr>
+                    `;
+                });
+                
+                message += `
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `;
+                
+                // تحديث التحذيرات
+                calculationResults.warnings.push(`تم تطبيق الكوتا النسائية عن طريق استبدال ${adjustments.length} مرشح(ين) ذكر بمرشحة(ات) أنثى`);
+            } else {
+                message += `
+                    <div class="alert alert-danger">
+                        <i class="fas fa-times-circle me-2"></i>
+                        <strong>⚠️ لم يتم تحقيق الكوتا النسائية ولا يوجد مرشحات غير فائزات للاستبدال!</strong>
+                    </div>
+                `;
+                calculationResults.warnings.push(`لم يتم تحقيق الكوتا النسائية (المطلوب: ${minWomenRequired}، الحالي: ${currentWomenWinners})`);
+            }
+            
+            return {message};
+        }
+
+        // الخطوة 6: توليد النتائج النهائية
+        function generateFinalResults() {
+            let message = `
+                <div class="alert alert-success">
+                    <div class="d-flex align-items-center">
+                        <div class="me-3">
+                            <i class="fas fa-check-circle fa-2x"></i>
+                        </div>
+                        <div>
+                            <h5 class="alert-heading">✅ تم الانتهاء من جميع الحسابات بنجاح!</h5>
+                            <p class="mb-0">يمكنك الآن عرض النتائج التفصيلية في قسم "نتائج الانتخابات".</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            return {message};
+        }
+
+        // عرض النتائج النهائية
+        function displayFinalResults() {
+            // تحديث النتائج السريعة
+            const quickResults = document.getElementById('quickResults');
+            quickResults.innerHTML = `
+                <div class="text-center">
+                    <h2 class="text-primary fw-bold mb-0">${calculationResults.ourListSeats}</h2>
+                    <p class="mb-2">عدد المقاعد التي فازت بها عشيرة آل عودة</p>
+                    <div class="progress mb-3" style="height: 15px;">
+                        <div class="progress-bar bg-success" style="width: ${(calculationResults.ourListSeats / electionData.seatsCount) * 100}%"></div>
+                    </div>
+                    <small class="text-muted">من إجمالي ${electionData.seatsCount} مقعدًا</small>
+                </div>
+                <hr>
+                <div class="row text-center">
+                    <div class="col-6">
+                        <div class="p-2">
+                            <h5 class="fw-bold mb-0">${calculationResults.qualifiedLists.length}</h5>
+                            <small class="text-muted">قائمة مؤهلة</small>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="p-2">
+                            <h5 class="fw-bold mb-0">${calculationResults.ourWinners.length}</h5>
+                            <small class="text-muted">فائز من العشيرة</small>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // عرض النتائج المفصلة
+            const resultsContainer = document.getElementById('resultsContainer');
+            
+            // حساب النسب
+            const totalSeats = electionData.seatsCount;
+            const ourSeatsPercentage = ((calculationResults.ourListSeats / totalSeats) * 100).toFixed(1);
+            
+            resultsContainer.innerHTML = `
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-header bg-light">
+                                <i class="fas fa-chart-bar me-2"></i>ملخص النتائج
+                            </div>
+                            <div class="card-body">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <th>إجمالي الناخبين:</th>
+                                            <td class="fw-bold">${electionData.votersCount.toLocaleString()}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>الأصوات الصحيحة:</th>
+                                            <td class="fw-bold">${calculationResults.validVotes.toLocaleString()}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>عتبة الحسم (5%):</th>
+                                            <td class="fw-bold text-primary">${calculationResults.threshold.toLocaleString()} صوت</td>
+                                        </tr>
+                                        <tr>
+                                            <th>القوائم المؤهلة:</th>
+                                            <td>${calculationResults.qualifiedLists.length}</td>
+                                        </tr>
+                                        <tr class="table-success">
+                                            <th>المقاعد التي فازت بها قائمتنا:</th>
+                                            <td class="fw-bold">${calculationResults.ourListSeats} مقعد (${ourSeatsPercentage}%)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-header bg-light">
+                                <i class="fas fa-list-ol me-2"></i>توزيع المقاعد بين القوائم
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>القائمة</th>
+                                                <th>الأصوات</th>
+                                                <th>المقاعد</th>
+                                                <th>النسبة</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            ${Object.entries(calculationResults.seatsDistribution).map(([listName, seats]) => {
+                                                const list = calculationResults.qualifiedLists.find(l => l.name === listName);
+                                                const votes = list ? list.votes : 0;
+                                                const percentage = ((seats / totalSeats) * 100).toFixed(1);
+                                                const isOurList = listName === electionData.listName;
+                                                
+                                                return `
+                                                    <tr ${isOurList ? 'class="table-success"' : ''}>
+                                                        <td>
+                                                            ${listName} 
+                                                            ${isOurList ? '<span class="badge bg-success ms-1">قائمتنا</span>' : ''}
+                                                        </td>
+                                                        <td>${votes.toLocaleString()}</td>
+                                                        <td><strong>${seats}</strong></td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <span class="me-2">${percentage}%</span>
+                                                                <div class="percentage-bar flex-grow-1">
+                                                                    <div class="percentage-fill" style="width: ${percentage}%"></div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                `;
+                                            }).join('')}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // عرض الفائزين من عشيرة آل عودة
+            const winnersContainer = document.getElementById('winnersContainer');
+            if (calculationResults.ourWinners.length > 0) {
+                winnersContainer.innerHTML = `
+                    <div class="list-group">
+                        ${calculationResults.ourWinners.map((winner, index) => `
+                            <div class="list-group-item list-group-item-action ${winner.gender === 'female' ? 'list-group-item-warning' : ''}">
+                                <div class="d-flex w-100 justify-content-between align-items-center">
+                                    <h6 class="mb-1 fw-bold">${index + 1}. ${winner.name}</h6>
+                                    <small class="text-muted">${winner.personalVotes.toLocaleString()} صوت</small>
+                                </div>
+                                <div class="mt-2">
+                                    <span class="badge ${winner.gender === 'female' ? 'bg-warning' : 'bg-primary'} me-1">
+                                        ${winner.gender === 'male' ? 'ذكر' : 'أنثى'}
+                                    </span>
+                                    ${winner.religion ? `<span class="badge bg-info me-1">${winner.religion}</span>` : ''}
+                                    <span class="badge bg-success">
+                                        <i class="fas fa-trophy me-1"></i> فائز
+                                    </span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            } else {
+                winnersContainer.innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="fas fa-times-circle me-2"></i>
+                        <strong>لم يفز أي مرشح من عشيرة آل عودة</strong>
+                    </div>
+                `;
+            }
+            
+            // عرض التحذيرات
+            const warningsContainer = document.getElementById('warningsContainer');
+            if (calculationResults.warnings.length > 0) {
+                warningsContainer.innerHTML = `
+                    <div class="alert alert-warning">
+                        <h6><i class="fas fa-exclamation-triangle me-2"></i>تحذيرات:</h6>
+                        <ul class="mb-0">
+                            ${calculationResults.warnings.map(warning => `<li>${warning}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            } else {
+                warningsContainer.innerHTML = `
+                    <div class="alert alert-success">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle fa-2x me-3"></i>
+                            <div>
+                                <h6 class="mb-0">لا توجد تحذيرات</h6>
+                                <small class="text-muted">جميع الشروط مستوفاة بنجاح</small>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // إنشاء/تحديث مخطط توزيع المقاعد
+            createSeatsChart();
+        }
+
+        // إنشاء مخطط توزيع المقاعد
+        function createSeatsChart() {
+            const ctx = document.getElementById('seatsChart').getContext('2d');
+            
+            // تحضير البيانات للمخطط
+            const labels = [];
+            const data = [];
+            const backgroundColors = [];
+            const hoverBackgroundColors = [];
+            
+            Object.entries(calculationResults.seatsDistribution).forEach(([listName, seats], index) => {
+                labels.push(listName);
+                data.push(seats);
+                
+                // تحديد الألوان: الأخضر لقائمتنا، ألوان أخرى للقوائم الأخرى
+                if (listName === electionData.listName) {
+                    backgroundColors.push('#2e7d32'); // أخضر داكن
+                    hoverBackgroundColors.push('#1b5e20'); // أخضر أغمق
+                } else {
+                    const colors = [
+                        '#1565c0', '#0277bd', '#00838f', '#00695c', 
+                        '#558b2f', '#9e9d24', '#f9a825', '#ff8f00', 
+                        '#ef6c00', '#d84315', '#6a1b9a', '#8e24aa'
+                    ];
+                    backgroundColors.push(colors[index % colors.length]);
+                    hoverBackgroundColors.push(colors[(index + 4) % colors.length]);
+                }
+            });
+            
+            // إذا كان المخطط موجودًا بالفعل، تدميره أولاً
+            if (seatsChart) {
+                seatsChart.destroy();
+            }
+            
+            // إنشاء المخطط
+            seatsChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: backgroundColors,
+                        hoverBackgroundColor: hoverBackgroundColors,
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            rtl: true,
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true,
+                                pointStyle: 'circle',
+                                font: {
+                                    family: 'Tajawal',
+                                    size: 12,
+                                    weight: '500'
+                                }
+                            }
+                        },
+                        tooltip: {
+                            rtl: true,
+                            bodyFont: {
+                                family: 'Tajawal',
+                                size: 14
+                            },
+                            titleFont: {
+                                family: 'Tajawal',
+                                size: 12
+                            },
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = Math.round((value / total) * 100);
+                                    return `${label}: ${value} مقاعد (${percentage}%)`;
+                                }
+                            }
+                        }
+                    },
+                    animation: {
+                        animateScale: true,
+                        animateRotate: true
+                    }
+                }
+            });
+            
+            // إنشاء وسيلة الإيضاح
+            const chartLegend = document.getElementById('chartLegend');
+            chartLegend.innerHTML = `
+                <h6 class="fw-bold mb-3">توزيع المقاعد:</h6>
+                <div class="list-group">
+                    ${labels.map((label, index) => `
+                        <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <span class="color-badge me-2" style="display: inline-block; width: 14px; height: 14px; background-color: ${backgroundColors[index]}; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.2);"></span>
+                                <span class="fw-medium">${label}</span>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">${data[index]}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // عرض نافذة الطباعة
+        function showPrintModal() {
+            const printContent = document.getElementById('printContent');
+            
+            // إنشاء محتوى قابل للطباعة
+            let printHTML = `
+                <div class="print-only">
+                    <div class="text-center mb-4">
+                        <h2 class="fw-bold text-dark">نظام الانتخابات المحلية الفلسطينية</h2>
+                        <h4 class="text-primary">قاعدة بيانات عشيرة آل عودة</h4>
+                        <p class="text-muted">بناءً على القرار بقانون رقم (23) لسنة 2025م</p>
+                        <hr>
+                    </div>
+                    
+                    <div class="row mb-4">
+                        <div class="col-6">
+                            <h5 class="fw-bold">بيانات الانتخاب</h5>
+                            <table class="table table-sm">
+                                <tr><td>نوع الانتخابات:</td><td class="fw-bold">${electionData.type === 'municipal' ? 'انتخابات المجالس البلدية' : 'انتخابات المجالس القروية'}</td></tr>
+                                <tr><td>عدد الناخبين:</td><td class="fw-bold">${electionData.votersCount.toLocaleString()}</td></tr>
+                                <tr><td>عدد المقاعد:</td><td class="fw-bold">${electionData.seatsCount}</td></tr>
+                                <tr><td>نسبة المشاركة:</td><td class="fw-bold">${electionData.participationRate}%</td></tr>
+                            </table>
+                        </div>
+                        <div class="col-6">
+                            <h5 class="fw-bold">قائمة عشيرة آل عودة</h5>
+                            <table class="table table-sm">
+                                <tr><td>اسم القائمة:</td><td class="fw-bold">${electionData.listName}</td></tr>
+                                <tr><td>الأصوات المتوقعة:</td><td class="fw-bold">${electionData.listVotes.toLocaleString()}</td></tr>
+                                <tr><td>عدد المرشحين:</td><td class="fw-bold">${electionData.candidates.length}</td></tr>
+                                <tr><td>المطلوب فوزهم:</td><td class="fw-bold">${electionData.requiredCandidates}</td></tr>
+                            </table>
+                        </div>
+                    </div>
+            `;
+            
+            // إذا كانت هناك نتائج حسابية، أضفها
+            if (calculationResults) {
+                printHTML += `
+                    <div class="mb-4">
+                        <h5 class="fw-bold text-primary border-bottom pb-2">نتائج الحسابات</h5>
+                        <table class="table table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>البند</th>
+                                    <th>القيمة</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>إجمالي الأصوات الصحيحة</td>
+                                    <td class="fw-bold">${calculationResults.validVotes.toLocaleString()}</td>
+                                </tr>
+                                <tr>
+                                    <td>عتبة الحسم (5%)</td>
+                                    <td class="fw-bold">${calculationResults.threshold.toLocaleString()}</td>
+                                </tr>
+                                <tr>
+                                    <td>عدد القوائم المؤهلة</td>
+                                    <td>${calculationResults.qualifiedLists.length}</td>
+                                </tr>
+                                <tr class="table-success">
+                                    <td>المقاعد التي فازت بها قائمتنا</td>
+                                    <td class="fw-bold">${calculationResults.ourListSeats}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5 class="fw-bold text-primary border-bottom pb-2">توزيع المقاعد بين القوائم</h5>
+                        <table class="table table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>القائمة</th>
+                                    <th>الأصوات</th>
+                                    <th>المقاعد</th>
+                                    <th>النسبة</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+                
+                Object.entries(calculationResults.seatsDistribution).forEach(([listName, seats]) => {
+                    const list = calculationResults.qualifiedLists.find(l => l.name === listName);
+                    const votes = list ? list.votes : 0;
+                    const percentage = ((seats / electionData.seatsCount) * 100).toFixed(1);
+                    const isOurList = listName === electionData.listName;
+                    
+                    printHTML += `
+                        <tr ${isOurList ? 'style="background-color: #e8f5e9;"' : ''}>
+                            <td>${listName} ${isOurList ? '(قائمتنا)' : ''}</td>
+                            <td>${votes.toLocaleString()}</td>
+                            <td>${seats}</td>
+                            <td>${percentage}%</td>
+                        </tr>
+                    `;
+                });
+                
+                printHTML += `
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5 class="fw-bold text-primary border-bottom pb-2">الفائزون من عشيرة آل عودة</h5>
+                        <table class="table table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>اسم المرشح</th>
+                                    <th>الأصوات الشخصية</th>
+                                    <th>الجنس</th>
+                                    <th>الدين</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+                
+                if (calculationResults.ourWinners.length > 0) {
+                    calculationResults.ourWinners.forEach((winner, index) => {
+                        printHTML += `
+                            <tr>
+                                <td>${index + 1}</td>
+                                <td class="fw-bold">${winner.name}</td>
+                                <td>${winner.personalVotes.toLocaleString()}</td>
+                                <td>${winner.gender === 'male' ? 'ذكر' : 'أنثى'}</td>
+                                <td>${winner.religion || '-'}</td>
+                            </tr>
+                        `;
+                    });
+                } else {
+                    printHTML += `
+                        <tr>
+                            <td colspan="5" class="text-center text-danger">لم يفز أي مرشح من عشيرة آل عودة</td>
+                        </tr>
+                    `;
+                }
+                
+                printHTML += `
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+            }
+            
+            printHTML += `
+                    <div class="mt-5 pt-4 border-top text-center text-muted">
+                        <p>تم إنشاء هذا التقرير بواسطة نظام الانتخابات المحلية الفلسطينية</p>
+                        <p>تصميم وتطوير: المهندس عمر أيمن عودة</p>
+                        <p>تاريخ الطباعة: ${new Date().toLocaleDateString('ar-EG')}</p>
+                    </div>
+                </div>
+            `;
+            
+            printContent.innerHTML = printHTML;
+            
+            // عرض النافذة
+            const printModal = new bootstrap.Modal(document.getElementById('printModal'));
+            printModal.show();
+        }
+
+        // طباعة النتائج مباشرة
+        function printResults() {
+            showPrintModal();
+        }
+
+        // طباعة وصف النظام
+        function printSystemDescription() {
+            const originalContent = document.body.innerHTML;
+            const printContent = document.getElementById('database').innerHTML;
+            
+            document.body.innerHTML = `
+                <div class="container mt-5">
+                    <div class="text-center mb-4">
+                        <h1 class="fw-bold">نظام الانتخابات المحلية الفلسطينية</h1>
+                        <h3 class="text-primary">وصف النظام والمزايا</h3>
+                        <p class="text-muted">بناءً على القرار بقانون رقم (23) لسنة 2025م</p>
+                        <hr>
+                    </div>
+                    ${printContent}
+                    <div class="mt-5 text-center text-muted">
+                        <p>تم إنشاء هذا التقرير بواسطة نظام الانتخابات المحلية الفلسطينية</p>
+                        <p>تصميم وتطوير: المهندس عمر أيمن عودة</p>
+                        <p>تاريخ الطباعة: ${new Date().toLocaleDateString('ar-EG')}</p>
+                    </div>
+                </div>
+            `;
+            
+            window.print();
+            document.body.innerHTML = originalContent;
+            location.reload(); // إعادة تحميل الصفحة لاستعادة الوظائف
+        }
+
+        // تصدير البيانات
+        function exportData() {
+            const dataStr = JSON.stringify(electionData, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = `election-data-${new Date().toISOString().slice(0,10)}.json`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+            
+            showAlert('تم تصدير البيانات بنجاح!', 'success', 3000);
+        }
+
+        // تصدير المخطط
+        function exportChart() {
+            if (!seatsChart) {
+                showAlert('لا يوجد مخطط لتصديره!', 'warning', 3000);
+                return;
+            }
+            
+            const link = document.createElement('a');
+            link.download = `election-chart-${new Date().toISOString().slice(0,10)}.png`;
+            link.href = seatsChart.toBase64Image();
+            link.click();
+            
+            showAlert('تم تصدير المخطط بنجاح!', 'success', 3000);
+        }
+
+        // توسيع المخطط
+        function toggleFullscreenChart() {
+            const chartCanvas = document.getElementById('seatsChart');
+            chartCanvas.style.height = chartCanvas.style.height === '400px' ? '200px' : '400px';
+            
+            if (seatsChart) {
+                seatsChart.resize();
+            }
+        }
+
+        // بدء الدليل الإرشادي
+        function startGuide() {
+            showAlert('سيبدأ الدليل الإرشادي قريباً...', 'info', 3000);
+            // يمكن إضافة دليل تفاعلي هنا
+        }
+
+        // التجربة السريعة
+        function quickDemo() {
+            // تعيين بيانات عشوائية
+            electionData.votersCount = 15000;
+            electionData.seatsCount = 13;
+            electionData.participationRate = 75;
+            electionData.listVotes = 3500;
+            electionData.requiredCandidates = 6;
+            
+            // تحديث الواجهة
+            initializePage();
+            updateStats();
+            updateHeaderStats();
+            
+            // إجراء الحسابات تلقائياً
+            autoCalculate();
+            
+            showAlert('تم تحميل بيانات تجريبية وإجراء الحسابات!', 'success', 4000);
+        }
+
+        // عرض مساعدة عامة
+        function showGeneralHelp() {
+            const helpText = `
+                <h5><i class="fas fa-info-circle me-2 text-primary"></i>مساعدة: بيانات الانتخاب العامة</h5>
+                <p>هذا القسم يحتوي على إعدادات الانتخابات الأساسية:</p>
+                <ul>
+                    <li><strong>نوع الانتخابات:</strong> اختر بين انتخابات المجالس البلدية (بنظام القوائم) أو انتخابات المجالس القروية (بنظام الأغلبية).</li>
+                    <li><strong>عدد الناخبين:</strong> إجمالي الناخبين المسجلين في المنطقة.</li>
+                    <li><strong>عدد المقاعد:</strong> عدد مقاعد المجلس المحلي المراد انتخابه.</li>
+                    <li><strong>نسبة المشاركة:</strong> النسبة المتوقعة للمصوتين من إجمالي الناخبين.</li>
+                    <li><strong>نسبة الأصوات الباطلة:</strong> النسبة المتوقعة للأصوات غير الصحيحة.</li>
+                </ul>
+                <p class="mb-0">بعد تعديل أي قيمة، انقر على زر "تحديث البيانات" لحفظ التغييرات.</p>
+            `;
+            
+            showModal('مساعدة', helpText);
+        }
+
+        // عرض مساعدة القائمة
+        function showListHelp() {
+            const helpText = `
+                <h5><i class="fas fa-users me-2 text-success"></i>مساعدة: بيانات قائمة عشيرة آل عودة</h5>
+                <p>هذا القسم مخصص لبيانات قائمة عشيرة آل عودة:</p>
+                <ul>
+                    <li><strong>اسم القائمة:</strong> اسم القائمة الانتخابية (يمكن تغييره).</li>
+                    <li><strong>الأصوات المتوقعة:</strong> عدد الأصوات المتوقع أن تحصل عليه القائمة.</li>
+                    <li><strong>عدد المرشحين المطلوب فوزهم:</strong> الحد الأدنى لعدد المرشحين الذين ترغب العشيرة في فوزهم.</li>
+                    <li><strong>الكوتا النسائية:</strong> تفعيل/تعطيل تطبيق الكوتا النسائية على القائمة.</li>
+                    <li><strong>الكوتا الإسلامية-المسيحية:</strong> تفعيل/تعطيل تطبيق الكوتا الدينية (في المناطق المختلطة).</li>
+                </ul>
+                <p class="mb-0">انقر على زر "إضافة مرشح جديد" لإضافة مرشحين جدد للقائمة.</p>
+            `;
+            
+            showModal('مساعدة', helpText);
+        }
+
+        // عرض نافذة اتصال
+        function showContactModal() {
+            const contactText = `
+                <div class="text-center mb-4">
+                    <i class="fas fa-headset fa-4x text-primary mb-3"></i>
+                    <h4 class="fw-bold">اتصل بنا</h4>
+                    <p class="text-muted">للاستفسارات والدعم الفني</p>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-user-tie fa-2x text-primary mb-3"></i>
+                                <h5 class="card-title">المطور</h5>
+                                <p class="card-text fw-bold">المهندس عمر أيمن عودة</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-envelope fa-2x text-success mb-3"></i>
+                                <h5 class="card-title">البريد الإلكتروني</h5>
+                                <p class="card-text">omar27owda@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="alert alert-info mt-3">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>ملاحظة:</strong> هذا نظام افتراضي لتجربة نظام الانتخابات المحلية الفلسطينية.
+                </div>
+            `;
+            
+            showModal('اتصل بنا', contactText);
+        }
+
+        // إعادة تعيين النظام إلى الإعدادات الافتراضية
+        function resetToDefaults() {
+            if (confirm('هل أنت متأكد من إعادة تعيين جميع البيانات؟ سيتم فقدان جميع التغييرات والنتائج.')) {
+                // إعادة تعيين البيانات
+                electionData = {
+                    type: "municipal",
+                    votersCount: 10000,
+                    seatsCount: 11,
+                    participationRate: 70,
+                    invalidVotesRate: 5,
+                    listName: "قائمة عشيرة آل عودة",
+                    listVotes: 2500,
+                    requiredCandidates: 5,
+                    womenQuota: true,
+                    religiousQuota: false,
+                    candidates: [
+                        {id: 1, name: "أحمد عودة", personalVotes: 800, gender: "male", religion: "مسلم"},
+                        {id: 2, name: "زينة عودة", personalVotes: 750, gender: "female", religion: "مسلم"},
+                        {id: 3, name: "محمد عودة", personalVotes: 720, gender: "male", religion: "مسلم"},
+                        {id: 4, name: "فاتن عودة", personalVotes: 680, gender: "female", religion: "مسلم"},
+                        {id: 5, name: "همام عودة", personalVotes: 650, gender: "male", religion: "مسلم"},
+                        {id: 6, name: "ليلى عودة", personalVotes: 630, gender: "female", religion: "مسلم"},
+                        {id: 7, name: "محمود عودة", personalVotes: 600, gender: "male", religion: "مسلم"},
+                        {id: 8, name: "نادية عودة", personalVotes: 580, gender: "female", religion: "مسلم"},
+                        {id: 9, name: "يوسف عودة", personalVotes: 550, gender: "male", religion: "مسلم"},
+                        {id: 10, name: "ريم عودة", personalVotes: 520, gender: "female", religion: "مسلم"},
+                        {id: 11, name: "زيد عودة", personalVotes: 500, gender: "male", religion: "مسلم"}
+                    ],
+                    competingLists: [
+                        {id: 1, name: "قائمة التغيير", votes: 2000},
+                        {id: 2, name: "قائمة الإصلاح", votes: 1500},
+                        {id: 3, name: "قائمة المستقبل", votes: 1000}
+                    ]
+                };
+                
+                // إعادة تعيين الواجهة
+                initializePage();
+                renderCandidatesTable();
+                renderCompetingLists();
+                updateStats();
+                updateHeaderStats();
+                
+                // مسح النتائج
+                document.getElementById('calculationSteps').innerHTML = `
+                    <div class="alert alert-info">
+                        <div class="d-flex">
+                            <div class="me-3">
+                                <i class="fas fa-calculator fa-2x text-info"></i>
+                            </div>
+                            <div>
+                                <h5 class="alert-heading">مرحبًا بك في محرك الحسابات الانتخابية</h5>
+                                <p class="mb-0">سيتم عرض خطوات الحساب التفصيلية هنا عند الضغط على زر "بدء الحسابات".</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                document.getElementById('quickResults').innerHTML = `
+                    <div class="text-center py-4">
+                        <i class="fas fa-poll fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">سيتم عرض النتائج هنا بعد إجراء الحسابات</p>
+                    </div>
+                `;
+                
+                document.getElementById('resultsContainer').innerHTML = `
+                    <div class="text-center py-5">
+                        <i class="fas fa-chart-bar fa-4x text-muted mb-3"></i>
+                        <h4 class="text-muted">نتائج الانتخابات</h4>
+                        <p class="text-muted">سيتم عرض النتائج المفصلة هنا بعد إجراء الحسابات</p>
+                    </div>
+                `;
+                
+                document.getElementById('winnersContainer').innerHTML = `
+                    <div class="text-center py-4">
+                        <i class="fas fa-award fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">سيتم عرض قائمة الفائزين هنا</p>
+                    </div>
+                `;
+                
+                document.getElementById('warningsContainer').innerHTML = `
+                    <div class="text-center py-3">
+                        <i class="fas fa-check-circle fa-2x text-success mb-2"></i>
+                        <p class="text-muted">لا توجد تحذيرات حالياً</p>
+                    </div>
+                `;
+                
+                // إعادة تعيين المخطط
+                if (seatsChart) {
+                    seatsChart.destroy();
+                    seatsChart = null;
+                }
+                document.getElementById('chartLegend').innerHTML = '';
+                
+                // عرض رسالة نجاح
+                showAlert('تم إعادة تعيين جميع البيانات بنجاح!', 'success', 4000);
+            }
+        }
+
+        // وظيفة مساعدة لعرض النوافذ المنبثقة
+        function showModal(title, content) {
+            // إنشاء نافذة منبثقة ديناميكية
+            const modalId = 'customModal';
+            let modal = document.getElementById(modalId);
+            
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = modalId;
+                modal.className = 'modal fade';
+                modal.tabIndex = -1;
+                modal.innerHTML = `
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">${title}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                ${content}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+            } else {
+                modal.querySelector('.modal-title').textContent = title;
+                modal.querySelector('.modal-body').innerHTML = content;
+            }
+            
+            const modalInstance = new bootstrap.Modal(modal);
+            modalInstance.show();
+        }
+
+        // وظيفة لعرض رسائل التنبيه
+        function showAlert(message, type, duration = 5000) {
+            // إزالة أي رسالة سابقة
+            const existingAlert = document.querySelector('.alert-fixed');
+            if (existingAlert) {
+                existingAlert.remove();
+            }
+            
+            // إنشاء الرسالة
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show alert-fixed`;
+            alertDiv.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                z-index: 9999;
+                min-width: 350px;
+                max-width: 500px;
+                box-shadow: var(--shadow-heavy);
+                border-radius: var(--border-radius);
+                border: none;
+                font-weight: 500;
+            `;
+            
+            let icon = 'info-circle';
+            if (type === 'success') icon = 'check-circle';
+            if (type === 'warning') icon = 'exclamation-triangle';
+            if (type === 'danger') icon = 'times-circle';
+            
+            alertDiv.innerHTML = `
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-${icon} fa-2x me-3"></i>
+                    <div class="flex-grow-1">
+                        ${message}
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            `;
+            
+            document.body.appendChild(alertDiv);
+            
+            // إزالة الرسالة تلقائياً بعد المدة المحددة
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.remove();
+                }
+            }, duration);
+        }
+    </script>
+</body>
+</html>
